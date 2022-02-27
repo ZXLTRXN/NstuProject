@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NSTUProjectTheme {
-                WebViewScreen(Pages.SEARCH_BACHELORS_PROGRAMS)
+                WebViewScreen(Pages.CONTRACT)
             }
         }
     }
