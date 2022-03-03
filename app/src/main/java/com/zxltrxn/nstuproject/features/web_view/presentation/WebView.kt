@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.web_view_feature.presentation
+package com.zxltrxn.nstuproject.features.web_view.presentation
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -17,11 +17,11 @@ import com.zxltrxn.nstuproject.Constants.TAG
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun WebViewScreen(
-    targetPage:Pages,
-    allowedUrlHost:String = "www.nstu.ru",
-    cache:CacheModes = CacheModes.CACHE,
+    url:String?,
+    allowedUrlHost:List<String> = listOf("www.nstu.ru","ciu.nstu.ru"),
+    cacheMode:Int = CacheMode.CACHE.value,
     isJSEnabled:Boolean = true,
-    isFileLoadingEnabled:Boolean = true
+    isFileLoadingEnabled:Boolean = false
 ){
     val context = LocalContext.current
 
@@ -37,17 +37,19 @@ fun WebViewScreen(
                     request: WebResourceRequest?
                 ): Boolean {
                     Log.d(TAG, "shouldOverrideUrlLoading: ${request?.url?.host}")
-                    return request?.url?.host !=  allowedUrlHost
+                    return request?.url?.host !in allowedUrlHost
                 }
             }
 
-            settings.cacheMode = cache.mode
+            settings.cacheMode = cacheMode
             settings.javaScriptEnabled = isJSEnabled
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 settings.forceDark = WebSettings.FORCE_DARK_AUTO
             }
-            loadUrl(targetPage.url)
+            url?.let{
+                loadUrl(it)
+            }
         }
     })
 }

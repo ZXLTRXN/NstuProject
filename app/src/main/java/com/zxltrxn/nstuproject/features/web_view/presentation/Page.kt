@@ -1,6 +1,6 @@
-package com.zxltrxn.nstuproject.web_view_feature.presentation
+package com.zxltrxn.nstuproject.features.web_view.presentation
 
-enum class Pages(val url:String) {
+enum class Page(val url:String) {
     PHONEBOOK("https://nstu.ru/phone"),  // check криво
     COMPETITION("https://www.nstu.ru/entrance/committee/completition2020"),// на каждый год направления заменить их названиями
     RECRUITING_PLAN("https://www.nstu.ru/entrance/committee/plan"), // check криво
