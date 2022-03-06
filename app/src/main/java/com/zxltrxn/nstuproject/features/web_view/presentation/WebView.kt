@@ -22,8 +22,8 @@ fun WebViewScreen(
     allowedUrlHost:List<String> = listOf("www.nstu.ru"),
     urlHostWithIntent:List<String> =  listOf("ciu.nstu.ru"),
     cacheMode:Int = CacheMode.CACHE.value,
-    isJSEnabled:Boolean = true,
-    isFileLoadingEnabled:Boolean = false
+//    isJSEnabled:Boolean = true,
+    isFileLoadingEnabled:Boolean = true
 ){
     val context = LocalContext.current
 
@@ -48,8 +48,6 @@ fun WebViewScreen(
                     }else{
                         request?.url?.host !in  allowedUrlHost
                     }
-//                    return request?.url?.host !in allowedUrlHost
-//                    return request?.url?.host !=  allowedUrlHost //false когда можно
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
@@ -57,12 +55,13 @@ fun WebViewScreen(
                             "document.getElementsByClassName('header-mobile')[0].style.display=\"none\"; " +
                             "document.getElementsByClassName('breadcrumbs')[0].style.display=\"none\"; " +
                             "document.getElementsByClassName('page-footer')[0].style.display=\"none\"; " +
-                            "})()");
+                            "})()")
                 }
             }
 
             settings.cacheMode = cacheMode
-            settings.javaScriptEnabled = isJSEnabled
+            settings.javaScriptEnabled = true
+            settings.allowFileAccess = isFileLoadingEnabled
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 settings.forceDark = WebSettings.FORCE_DARK_AUTO

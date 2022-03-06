@@ -19,7 +19,7 @@ fun HomeScreen(navController: NavController) {
     ) {
         Text(
             modifier = Modifier.clickable{
-                navController.navigate(Screen.WebView.withArgs(Page.PERSONAL_AREA.url))
+                navController.navigate(Screen.WebView.withArgs(Page.RECRUITING_PLAN.url))
             },
             text = "webView")
     }
