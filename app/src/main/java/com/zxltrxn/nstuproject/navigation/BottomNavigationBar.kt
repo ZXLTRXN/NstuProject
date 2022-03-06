@@ -14,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.ramcosta.composedestinations.navigation.navigateTo
 import com.zxltrxn.nstuproject.features.destinations.Destination
+import com.zxltrxn.nstuproject.features.destinations.HomeScreenDestination
 import com.zxltrxn.nstuproject.features.navDestination
 
 
@@ -35,6 +36,7 @@ fun BottomNavigationBar(
                 selected = isSelected,
                 onClick = {
                     navController.navigateTo(item.direction) {
+                        popUpTo(HomeScreenDestination.route)
                         launchSingleTop = true
                     }
                 },

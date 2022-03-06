@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.zxltrxn.nstuproject.features.NavGraphs
@@ -16,20 +15,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NSTUProjectTheme {
-                App()
+                val navController = rememberNavController()
+                Scaffold(
+                    bottomBar = {
+                        BottomNavigationBar(navController = navController)
+                    }
+                ){
+                    DestinationsNavHost(navGraph = NavGraphs.root, navController = navController)
+                }
             }
         }
-    }
-}
-
-@Composable
-fun App(){
-    val navController = rememberNavController()
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(navController = navController)
-        }
-    ){
-        DestinationsNavHost(navGraph = NavGraphs.root, navController = navController)
     }
 }
