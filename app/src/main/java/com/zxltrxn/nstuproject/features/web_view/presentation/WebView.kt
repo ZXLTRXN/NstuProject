@@ -12,10 +12,12 @@ import android.webkit.WebViewClient
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
+import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.Constants.TAG
 
 
 @SuppressLint("SetJavaScriptEnabled")
+@Destination
 @Composable
 fun WebViewScreen(
     url:String?,
@@ -23,7 +25,7 @@ fun WebViewScreen(
     urlHostWithIntent:List<String> =  listOf("ciu.nstu.ru"),
     cacheMode:Int = CacheMode.CACHE.value,
 //    isJSEnabled:Boolean = true,
-    isFileLoadingEnabled:Boolean = true
+    isFileLoadingEnabled:Boolean = false
 ){
     val context = LocalContext.current
 

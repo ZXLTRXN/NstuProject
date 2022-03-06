@@ -7,19 +7,25 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.zxltrxn.nstuproject.features.destinations.WebViewScreenDestination
 import com.zxltrxn.nstuproject.features.web_view.presentation.Page
-import com.zxltrxn.nstuproject.navigation.Screen
 
+@Destination(start = true)
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navigator:DestinationsNavigator
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Text(
             modifier = Modifier.clickable{
-                navController.navigate(Screen.WebView.withArgs(Page.RECRUITING_PLAN.url))
+                navigator.navigate(direction = WebViewScreenDestination(
+                    url = Page.RECRUITING_PLAN.url
+                ))
             },
             text = "webView")
     }
