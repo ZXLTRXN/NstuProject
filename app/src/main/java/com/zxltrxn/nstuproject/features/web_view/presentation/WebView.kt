@@ -1,6 +1,7 @@
 package com.zxltrxn.nstuproject.features.web_view.presentation
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import android.view.ViewGroup
@@ -18,7 +19,8 @@ import com.zxltrxn.nstuproject.Constants.TAG
 @Composable
 fun WebViewScreen(
     url:String?,
-    allowedUrlHost:List<String> = listOf("www.nstu.ru","ciu.nstu.ru"),
+    allowedUrlHost:List<String> = listOf("www.nstu.ru"),
+    urlHostWithIntent:List<String> =  listOf("ciu.nstu.ru"),
     cacheMode:Int = CacheMode.CACHE.value,
     isJSEnabled:Boolean = true,
     isFileLoadingEnabled:Boolean = false
@@ -32,12 +34,30 @@ fun WebViewScreen(
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             webViewClient = object:WebViewClient(){
+
                 override fun shouldOverrideUrlLoading(
                     view: WebView?,
                     request: WebResourceRequest?
                 ): Boolean {
                     Log.d(TAG, "shouldOverrideUrlLoading: ${request?.url?.host}")
-                    return request?.url?.host !in allowedUrlHost
+                    return if (request?.url?.host in urlHostWithIntent){
+                        view?.context?.startActivity(
+                            Intent(Intent.ACTION_VIEW, request?.url)
+                        )
+                        true
+                    }else{
+                        request?.url?.host !in  allowedUrlHost
+                    }
+//                    return request?.url?.host !in allowedUrlHost
+//                    return request?.url?.host !=  allowedUrlHost //false когда можно
+                }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    view?.loadUrl("javascript:(function() { " +
+                            "document.getElementsByClassName('header-mobile')[0].style.display=\"none\"; " +
+                            "document.getElementsByClassName('breadcrumbs')[0].style.display=\"none\"; " +
+                            "document.getElementsByClassName('page-footer')[0].style.display=\"none\"; " +
+                            "})()");
                 }
             }
 

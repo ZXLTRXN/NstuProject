@@ -7,6 +7,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
 import com.zxltrxn.nstuproject.ui.theme.NSTUProjectTheme
 import com.zxltrxn.nstuproject.navigation.BottomNavItem
@@ -19,30 +22,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NSTUProjectTheme {
-                val navController = rememberNavController()
-                Scaffold(
-                    bottomBar = {
-                        BottomNavigationBar(
-                            items = listOf(
-                                BottomNavItem(
-                                    name = getString(R.string.home_screen_name),
-                                    route = Screen.Home.route,
-                                    icon = Icons.Default.Home
-                                ),
-                                BottomNavItem(name = getString(R.string.contacts_screen_name),
-                                    route = Screen.Contacts.route,
-                                    icon = Icons.Default.Phone
-                                )
-                            ),
-                            navController = navController,
-                            onItemClick = {navController.navigate(it.route)})
-                    }
-                ){
-                    Navigation(navController = navController)
-                }
-                
-//                WebViewScreen(Pages.CONTRACT)
+                App()
             }
         }
+    }
+}
+
+@Composable
+fun App(){
+    val navController = rememberNavController()
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(
+                items = listOf(
+                    BottomNavItem(
+                        name = stringResource(R.string.home_screen_name),
+                        route = Screen.Home.route,
+                        icon = Icons.Default.Home
+                    ),
+                    BottomNavItem(name = stringResource(R.string.contacts_screen_name),
+                        route = Screen.Contacts.route,
+                        icon = Icons.Default.Phone
+                    )
+                ),
+                navController = navController,
+                onItemClick = {navController.navigate(it.route)})
+        }
+    ){
+        Navigation(navController = navController)
     }
 }

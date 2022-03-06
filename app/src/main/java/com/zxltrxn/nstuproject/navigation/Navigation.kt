@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.zxltrxn.nstuproject.features.contacts.ContactsScreen
+import com.zxltrxn.nstuproject.features.home.HomeScreen
 import com.zxltrxn.nstuproject.features.web_view.presentation.WebViewScreen
 
 
