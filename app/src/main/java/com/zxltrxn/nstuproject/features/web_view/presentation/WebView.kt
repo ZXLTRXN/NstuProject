@@ -5,17 +5,18 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.zIndex
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.Constants.TAG
+import com.zxltrxn.nstuproject.common_composable.LoadingIndicator
 
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -23,30 +24,40 @@ import com.zxltrxn.nstuproject.Constants.TAG
 @Composable
 fun WebViewScreen(
     url:String?,
-    isFileLoadingEnabled:Boolean = false,
-    allowedUrlHost:List<String> = listOf(
-        "www.nstu.ru", "www.avtf.nstu.ru", "www.fla.nstu.ru", "www.mtf.nstu.ru",
-        "www.fma.nstu.ru", "www.fpmi.nstu.ru", "www.ref.nstu.ru", "www.ftf.nstu.ru",
-        "www.fen.nstu.ru", "www.fb.nstu.ru", "www.fgo.nstu.ru", "www.istr.nstu.ru"
-    ),
-    urlHostWithIntent:List<String> =  listOf("ciu.nstu.ru"),
-    cacheMode:Int = CacheMode.NO_CACHE.value
+    cacheMode:Int = WebSettings.LOAD_CACHE_ELSE_NETWORK
 ){
+    val urlHostWithIntent:List<String> =  listOf("ciu.nstu.ru")
+    val allowedUrlHost:List<String> = listOf(
+    "www.nstu.ru", "www.avtf.nstu.ru", "www.fla.nstu.ru", "www.mtf.nstu.ru",
+    "www.fma.nstu.ru", "www.fpmi.nstu.ru", "www.ref.nstu.ru", "www.ftf.nstu.ru",
+    "www.fen.nstu.ru", "www.fb.nstu.ru", "www.fgo.nstu.ru", "www.istr.nstu.ru")
+
     val context = LocalContext.current
 
     var backEnabled by remember { mutableStateOf(false) }
+    var isLoading by remember{ mutableStateOf(true)}
+    
     var webView: WebView? = null
 
-    AndroidView(factory = {
+    if(isLoading){
+        LoadingIndicator()
+    }
+
+    AndroidView(
+        modifier = Modifier.zIndex(1F),
+        factory = {
         WebView(context).apply {
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
+
             webViewClient = object:WebViewClient(){
 
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                     backEnabled = view?.canGoBack()?: false
+                    if(!isLoading) isLoading = true
+                    view?.visibility = View.INVISIBLE
                 }
 
                 override fun shouldOverrideUrlLoading(
@@ -59,7 +70,8 @@ fun WebViewScreen(
                             Intent(Intent.ACTION_VIEW, request?.url)
                         )
                         true
-                    }else{
+                    }
+                    else{
                         request?.url?.host !in  allowedUrlHost
                     }
                 }
@@ -70,11 +82,12 @@ fun WebViewScreen(
                             "document.getElementsByClassName('breadcrumbs')[0].style.display=\"none\"; " +
                             "document.getElementsByClassName('page-footer')[0].style.display=\"none\"; " +
                             "})()")
+                    isLoading = false
+                    view?.visibility = View.VISIBLE
                 }
             }
             settings.cacheMode = cacheMode
             settings.javaScriptEnabled = true
-            settings.allowFileAccess = isFileLoadingEnabled
             webView = this
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -95,3 +108,8 @@ fun WebViewScreen(
 }
 
 
+//val dir: File = context.cacheDir
+//if (dir.exists())
+//Log.d(TAG, "shouldOverrideUrlLoading: yes Cache ${dir.listFiles()}")
+//else
+//Log.d(TAG, "shouldOverrideUrlLoading: noCache")

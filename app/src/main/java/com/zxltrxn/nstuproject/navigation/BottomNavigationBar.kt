@@ -16,6 +16,7 @@ import com.ramcosta.composedestinations.navigation.navigateTo
 import com.zxltrxn.nstuproject.features.destinations.Destination
 import com.zxltrxn.nstuproject.features.destinations.HomeScreenDestination
 import com.zxltrxn.nstuproject.features.navDestination
+import com.zxltrxn.nstuproject.ui.elevation
 
 
 @Composable
@@ -28,7 +29,7 @@ fun BottomNavigationBar(
     BottomNavigation(
         modifier = modifier,
         backgroundColor = MaterialTheme.colors.background,
-        elevation = 5.dp
+        elevation = MaterialTheme.elevation.small
     ) {
         BottomBarDestination.values().forEach { item ->
             val isSelected = currentDestination == item.direction

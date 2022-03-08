@@ -5,8 +5,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.zxltrxn.nstuproject.ui.Elevation
+import com.zxltrxn.nstuproject.ui.LocalElevation
+import com.zxltrxn.nstuproject.ui.LocalSpacing
+import com.zxltrxn.nstuproject.ui.Spacing
 
 private val DarkColorPalette = darkColors(
     primary = LightGreen,
@@ -48,10 +53,16 @@ fun NSTUProjectTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compo
         )
     }
 
-    MaterialTheme(
-        colors = colors,
-        typography = Typography,
-        shapes = Shapes,
-        content = content
-    )
+    CompositionLocalProvider(
+        LocalSpacing provides Spacing(),
+        LocalElevation provides Elevation()
+    ) {
+        MaterialTheme(
+            colors = colors,
+            typography = Typography,
+            shapes = Shapes,
+            content = content
+        )
+    }
+
 }
