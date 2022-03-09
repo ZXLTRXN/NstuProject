@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.web_view.presentation
+package com.zxltrxn.nstuproject.features.web_view
 
 enum class Page(val url:String) {
     PHONEBOOK("https://nstu.ru/phone"),  // check криво

@@ -9,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
+import androidx.lifecycle.ViewModelProvider
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.Constants.TAG
 import com.zxltrxn.nstuproject.common_composable.LoadingIndicator
@@ -32,12 +34,12 @@ fun WebViewScreen(
     "www.fma.nstu.ru", "www.fpmi.nstu.ru", "www.ref.nstu.ru", "www.ftf.nstu.ru",
     "www.fen.nstu.ru", "www.fb.nstu.ru", "www.fgo.nstu.ru", "www.istr.nstu.ru")
 
+    var webView: WebView? = null
     val context = LocalContext.current
+    val isDarkTheme = isSystemInDarkTheme()
 
     var backEnabled by remember { mutableStateOf(false) }
     var isLoading by remember{ mutableStateOf(true)}
-    
-    var webView: WebView? = null
 
     if(isLoading){
         LoadingIndicator()
@@ -90,8 +92,8 @@ fun WebViewScreen(
             settings.javaScriptEnabled = true
             webView = this
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                settings.forceDark = WebSettings.FORCE_DARK_AUTO
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && isDarkTheme) {
+                settings.forceDark = WebSettings.FORCE_DARK_ON
             }
 
             url?.let{
@@ -106,6 +108,23 @@ fun WebViewScreen(
         webView?.goBack()
     }
 }
+
+
+
+//@SuppressLint("SetJavaScriptEnabled")
+//@Destination
+//@Composable
+//fun WebViewScreen(
+//    url:String?,
+//    cacheMode:Int = WebSettings.LOAD_CACHE_ELSE_NETWORK
+//){
+//    val context = LocalContext.current
+//    val factory = WebViewVM.Factory(context)
+//
+//    val viewModel = ViewModelProvider(context, factory).get(WebViewVM::class.java)
+//
+//
+//}
 
 
 //val dir: File = context.cacheDir

@@ -23,13 +23,13 @@ fun LoadingIndicator(zIndex:Float = 2F){
             .padding(vertical = MaterialTheme.spacing.extraSmall),
         contentAlignment = Alignment.TopCenter
     ){
-        Surface(
-            shape = CircleShape,
-            elevation = MaterialTheme.elevation.small
-        ) {
+//        Surface(
+//            shape = CircleShape,
+//            elevation = MaterialTheme.elevation.small
+//        ) {
             CircularProgressIndicator(
                 color = MaterialTheme.colors.primary
             )
-        }
+//        }
     }
 }

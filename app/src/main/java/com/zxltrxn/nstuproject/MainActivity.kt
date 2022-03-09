@@ -3,7 +3,9 @@ package com.zxltrxn.nstuproject
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.zxltrxn.nstuproject.features.NavGraphs
@@ -20,8 +22,12 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         BottomNavigationBar(navController = navController)
                     }
-                ){
-                    DestinationsNavHost(navGraph = NavGraphs.root, navController = navController)
+                ){ contentPadding ->
+                    DestinationsNavHost(
+                        modifier = Modifier.padding(contentPadding),
+                        navGraph = NavGraphs.root,
+                        navController = navController
+                    )
                 }
             }
         }

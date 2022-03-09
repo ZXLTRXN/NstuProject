@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.zxltrxn.nstuproject.features.destinations.WebViewScreenDestination
-import com.zxltrxn.nstuproject.features.web_view.presentation.Page
+import com.zxltrxn.nstuproject.features.web_view.Page
 
 @Destination(start = true)
 @Composable
@@ -20,7 +20,7 @@ fun HomeScreen(
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceEvenly,
+        verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally,
 
     ) {
