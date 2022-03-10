@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.contacts
+package com.zxltrxn.nstuproject.features.parsing.contacts
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

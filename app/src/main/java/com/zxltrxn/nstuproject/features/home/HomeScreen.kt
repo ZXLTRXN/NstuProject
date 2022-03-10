@@ -11,9 +11,13 @@ import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.zxltrxn.nstuproject.features.destinations.WebViewScreenDestination
-import com.zxltrxn.nstuproject.features.web_view.Page
+import com.zxltrxn.nstuproject.features.Page
+import com.zxltrxn.nstuproject.features.destinations.RecruitingPlanScreenDestination
+import com.zxltrxn.nstuproject.features.destinations.PointsScreenDestination
 
-@Destination(start = true)
+
+@Destination
+//@Destination(start = true)
 @Composable
 fun HomeScreen(
     navigator:DestinationsNavigator
@@ -33,6 +37,16 @@ fun HomeScreen(
             text = "криво")
         Text(
             modifier = Modifier.clickable{
+                navigator.navigate(direction = RecruitingPlanScreenDestination())
+            },
+            text = "план набора")
+        Text(
+            modifier = Modifier.clickable{
+                navigator.navigate(direction = PointsScreenDestination())
+            },
+            text = "минимальные баллы")
+        Text(
+            modifier = Modifier.clickable{
                 navigator.navigate(direction = WebViewScreenDestination(
                     url = Page.PERSONAL_AREA.url
                 ))
@@ -48,7 +62,7 @@ fun HomeScreen(
         Text(
             modifier = Modifier.clickable{
                 navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.SEARCH_BACHELORS_PROGRAMS.url
+                    url = Page.MINIMUM_POINTS.url
                 ))
             },
             text = "нормально")
