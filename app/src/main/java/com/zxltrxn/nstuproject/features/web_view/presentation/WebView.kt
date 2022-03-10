@@ -15,9 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
-import androidx.lifecycle.ViewModelProvider
 import com.ramcosta.composedestinations.annotation.Destination
-import com.zxltrxn.nstuproject.Constants.TAG
+import com.zxltrxn.nstuproject.utils.Constants.TAG
 import com.zxltrxn.nstuproject.common_composable.LoadingIndicator
 
 
