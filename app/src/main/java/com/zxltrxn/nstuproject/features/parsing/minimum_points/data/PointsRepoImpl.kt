@@ -1,9 +1,9 @@
-package com.zxltrxn.nstuproject.features.parsing.minimum_points.data.repos
+package com.zxltrxn.nstuproject.features.parsing.minimum_points.data
 
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsData
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsTable
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.SubjectWithPoints
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.repos.PointsRepo
+import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.PointsRepo
 
 class PointsRepoImpl(): PointsRepo {
     override fun getPointsData(): PointsData {

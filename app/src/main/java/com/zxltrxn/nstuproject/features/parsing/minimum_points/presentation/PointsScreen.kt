@@ -13,20 +13,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.common_composable.LoadingIndicator
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsTable
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.SubjectWithPoints
 import com.zxltrxn.nstuproject.ui.spacing
+import dagger.hilt.EntryPoint
 
 
 @Destination(start = true)
 @Composable
 fun PointsScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ){
-//    val vm = viewModel<PointsVM>() //inject
+    val vm = hiltViewModel<PointsVM>()
+    val uiState by vm.uiState
+    if(uiState.isLoading) {
+        LoadingIndicator()
+    }
+    Text("${uiState.data?.title}")
 //    val uiState by vm.uiState
 //    if(uiState.isLoading){
 //        LoadingIndicator()

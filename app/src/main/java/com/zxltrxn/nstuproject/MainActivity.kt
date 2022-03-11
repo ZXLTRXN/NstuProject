@@ -11,7 +11,9 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.zxltrxn.nstuproject.features.NavGraphs
 import com.zxltrxn.nstuproject.ui.theme.NSTUProjectTheme
 import com.zxltrxn.nstuproject.navigation.BottomNavigationBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
