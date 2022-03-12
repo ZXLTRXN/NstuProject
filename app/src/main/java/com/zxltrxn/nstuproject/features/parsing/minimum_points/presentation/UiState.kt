@@ -4,6 +4,10 @@ import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.Poin
 
 data class UiState(
     val isLoading:Boolean = false,
-    val error:String? = null, //error class better
-    val data:PointsData? = null
-)
+    val error:Error? = null,
+    val data:PointsData = PointsData(title = "", tables = listOf())
+){
+    sealed class Error{
+        object NetworkError:Error()
+    }
+}

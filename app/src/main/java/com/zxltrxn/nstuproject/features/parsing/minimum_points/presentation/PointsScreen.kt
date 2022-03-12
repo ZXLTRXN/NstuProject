@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -33,33 +34,35 @@ fun PointsScreen(
     if(uiState.isLoading) {
         LoadingIndicator()
     }
-    Text("${uiState.data?.title}")
-//    val uiState by vm.uiState
-//    if(uiState.isLoading){
-//        LoadingIndicator()
-//    }else{
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(horizontal = MaterialTheme.spacing.medium)
-//        ) {
-//            Text(text = uiState.data?.title, style = MaterialTheme.typography.h1)
-//
-//            Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
-//
-//            for (table in uiState.data?.tables){
-//                Text(text = table.title, style = MaterialTheme.typography.h2)
-//
-//                Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
-//
-//                LazyColumn(){
-//                    items(table.items) { item ->
-//                        SubjectRow(item)
-//                    }
-//                }
-//            }
-//        }
-//    }
+    else{
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = MaterialTheme.spacing.medium)
+        ) {
+            Text(text = uiState.data.title, style = MaterialTheme.typography.h1)
+
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
+
+            for (table in uiState.data.tables){
+                Text(text = table.title, style = MaterialTheme.typography.h2)
+
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
+
+                LazyColumn(){
+                    items(table.items) { item ->
+                        SubjectRow(item)
+                    }
+                }
+            }
+        }
+    }
+    when(uiState.error){
+        UiState.Error.NetworkError -> {
+            Text(text = "Сеть не доступна", )
+        }
+        else -> {}
+    }
 }
 
 @Composable

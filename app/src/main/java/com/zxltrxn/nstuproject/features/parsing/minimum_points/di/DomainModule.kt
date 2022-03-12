@@ -1,7 +1,7 @@
 package com.zxltrxn.nstuproject.features.parsing.minimum_points.di
 
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.PointsRepo
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.GetPointsData
+import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.usecase.GetPointsData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
