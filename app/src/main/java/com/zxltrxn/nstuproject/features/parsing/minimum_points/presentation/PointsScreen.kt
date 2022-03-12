@@ -1,27 +1,22 @@
 package com.zxltrxn.nstuproject.features.parsing.minimum_points.presentation
 
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.zxltrxn.nstuproject.R
+import com.zxltrxn.nstuproject.common_composable.ErrorMessage
 import com.zxltrxn.nstuproject.common_composable.LoadingIndicator
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsTable
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.SubjectWithPoints
 import com.zxltrxn.nstuproject.ui.spacing
-import dagger.hilt.EntryPoint
 
 
 @Destination(start = true)
@@ -59,7 +54,7 @@ fun PointsScreen(
     }
     when(uiState.error){
         UiState.Error.NetworkError -> {
-            Text(text = "Сеть не доступна", )
+            ErrorMessage(stringResource(id = R.string.network_error))
         }
         else -> {}
     }
