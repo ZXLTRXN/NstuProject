@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.zxltrxn.nstuproject.features.parsing.Resource
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.usecase.GetPointsData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,8 +24,8 @@ class PointsVM @Inject constructor(
     }
 
     private fun fetchData(){
-        viewModelScope.launch {
-            _uiState.value = UiState(isLoading = true)
+        _uiState.value = UiState(isLoading = true)
+        viewModelScope.launch(Dispatchers.IO) {
             when(val resource = getData()){
                 is Resource.Success ->{
                     _uiState.value = resource.data?.let{

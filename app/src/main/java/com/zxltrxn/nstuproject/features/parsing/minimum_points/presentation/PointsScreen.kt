@@ -1,6 +1,5 @@
 package com.zxltrxn.nstuproject.features.parsing.minimum_points.presentation
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -8,13 +7,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.common_composable.ErrorMessage
+import com.zxltrxn.nstuproject.common_composable.Header
 import com.zxltrxn.nstuproject.common_composable.LoadingIndicator
+import com.zxltrxn.nstuproject.common_composable.Subtitle
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.SubjectWithPoints
 import com.zxltrxn.nstuproject.ui.spacing
 
@@ -31,22 +33,21 @@ fun PointsScreen(
     }
     else{
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(horizontal = MaterialTheme.spacing.medium)
         ) {
-            Text(text = uiState.data.title, style = MaterialTheme.typography.h1)
+            Header(text = uiState.data.title)
 
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
-
-            for (table in uiState.data.tables){
-                Text(text = table.title, style = MaterialTheme.typography.h2)
-
-                Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
-
-                LazyColumn(){
-                    items(table.items) { item ->
-                        SubjectRow(item)
+            LazyColumn(){
+                items(uiState.data.tables) { table ->
+                    Subtitle(text = table.title)
+                    for(subject in table.items){
+                        SubjectRow(subject)
+                        Spacer(
+                            modifier = Modifier
+                            .height(MaterialTheme.spacing.extraSmall)
+                        )
                     }
                 }
             }
@@ -62,8 +63,17 @@ fun PointsScreen(
 
 @Composable
 fun SubjectRow(item:SubjectWithPoints){
-    Column(){
-        Text(item.subjectName)
-        Text(item.points.toString())
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ){
+        Text(
+            modifier = Modifier.fillMaxWidth(0.85f),
+            text = item.subjectName,
+        )
+        Text(
+            modifier = Modifier.align(Alignment.CenterVertically),
+            text = item.points.toString()
+        )
     }
 }

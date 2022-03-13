@@ -1,7 +1,10 @@
 package com.zxltrxn.nstuproject.features.parsing.minimum_points.di
 
+import com.zxltrxn.nstuproject.features.parsing.Parser
+import com.zxltrxn.nstuproject.features.parsing.minimum_points.data.PointsParser
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.data.PointsRepoImpl
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.PointsRepo
+import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +23,13 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providePointsRepo(): PointsRepo {
-        return PointsRepoImpl()
+    fun providePointsParser(): Parser<PointsData> {
+        return PointsParser()
+    }
+
+    @Provides
+    @Singleton
+    fun providePointsRepo(parser: Parser<PointsData>): PointsRepo {
+        return PointsRepoImpl(parser)
     }
 }

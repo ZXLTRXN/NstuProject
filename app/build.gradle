@@ -75,6 +75,7 @@ dependencies {
 
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 
     // navigation
     implementation "androidx.navigation:navigation-compose:$nav_version"
@@ -95,7 +96,3 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 
 }
-//
-//kapt {
-//    correctErrorTypes true
-//}
