@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.web_view.presentation
+package com.zxltrxn.nstuproject.features.webView.presentation
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -17,7 +17,8 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.utils.Constants.TAG
-import com.zxltrxn.nstuproject.common_composable.LoadingIndicator
+import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
+import com.zxltrxn.nstuproject.features.Page
 
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -67,13 +68,14 @@ fun WebViewScreen(
                 ): Boolean {
                     Log.d(TAG, "shouldOverrideUrlLoading: ${request?.url?.host}")
                     return if (request?.url?.host in urlHostWithIntent){
+                        Log.d(TAG, "shouldOverrideUrlLoading: intent")
                         view?.context?.startActivity(
                             Intent(Intent.ACTION_VIEW, request?.url)
                         )
                         true
                     }
                     else{
-                        request?.url?.host !in  allowedUrlHost
+                        request?.url?.host !in allowedUrlHost
                     }
                 }
 
@@ -108,6 +110,13 @@ fun WebViewScreen(
     }
 }
 
+@Destination
+@Composable
+fun ContactsWebView() = WebViewScreen(Page.PHONE.url)
+
+@Destination
+@Composable
+fun PersonalAreaWebView() = WebViewScreen(Page.PERSONAL_AREA.url)
 
 
 //@SuppressLint("SetJavaScriptEnabled")

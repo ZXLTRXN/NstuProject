@@ -1,20 +1,19 @@
-package com.zxltrxn.nstuproject.features.parsing.minimum_points.presentation
+package com.zxltrxn.nstuproject.features.parsing.minimumPoints.presentation
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zxltrxn.nstuproject.features.parsing.Resource
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.usecase.GetPointsData
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.GetPointsDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class PointsVM @Inject constructor(
-    private val getData: GetPointsData
+    private val getData: GetPointsDataUseCase
 ):ViewModel() {
     private val _uiState = mutableStateOf(UiState())
     val uiState: State<UiState> = _uiState

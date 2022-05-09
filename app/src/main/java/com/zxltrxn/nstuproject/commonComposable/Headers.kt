@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.common_composable
+package com.zxltrxn.nstuproject.commonComposable
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -7,7 +7,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.zxltrxn.nstuproject.ui.spacing
-import okhttp3.internal.http2.Header
 
 @Composable
 fun Header(text:String){

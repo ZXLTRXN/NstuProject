@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model
+package com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model
 
 data class PointsTable(
     val title:String,

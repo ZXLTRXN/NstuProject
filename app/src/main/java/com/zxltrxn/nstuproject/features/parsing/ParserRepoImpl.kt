@@ -2,7 +2,7 @@ package com.zxltrxn.nstuproject.features.parsing
 
 import android.util.Log
 import com.zxltrxn.nstuproject.features.Page
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
 import com.zxltrxn.nstuproject.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

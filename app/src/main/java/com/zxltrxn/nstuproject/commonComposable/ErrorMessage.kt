@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.common_composable
+package com.zxltrxn.nstuproject.commonComposable
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

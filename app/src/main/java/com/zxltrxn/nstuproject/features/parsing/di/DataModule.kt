@@ -3,8 +3,8 @@ package com.zxltrxn.nstuproject.features.parsing.di
 import com.zxltrxn.nstuproject.features.parsing.Parser
 import com.zxltrxn.nstuproject.features.parsing.ParserRepo
 import com.zxltrxn.nstuproject.features.parsing.ParserRepoImpl
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.data.PointsParser
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.PointsParser
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

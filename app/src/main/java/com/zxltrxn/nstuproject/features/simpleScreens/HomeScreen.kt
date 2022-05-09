@@ -1,19 +1,19 @@
-package com.zxltrxn.nstuproject.features.home
+package com.zxltrxn.nstuproject.features.simpleScreens
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.zxltrxn.nstuproject.features.destinations.WebViewScreenDestination
 import com.zxltrxn.nstuproject.features.Page
-import com.zxltrxn.nstuproject.features.destinations.RecruitingPlanScreenDestination
+import com.zxltrxn.nstuproject.features.destinations.AchievementsScreenDestination
 import com.zxltrxn.nstuproject.features.destinations.PointsScreenDestination
+import com.zxltrxn.nstuproject.features.destinations.RaitingScreenDestination
 
 
 @Destination(start = true)
@@ -29,41 +29,50 @@ fun HomeScreen(
     ) {
         Text(
             modifier = Modifier.clickable{
-                navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.RECRUITING_PLAN.url
-                ))
-            },
-            text = "криво")
-        Text(
-            modifier = Modifier.clickable{
-                navigator.navigate(direction = RecruitingPlanScreenDestination())
-            },
-            text = "план набора")
-        Text(
-            modifier = Modifier.clickable{
                 navigator.navigate(direction = PointsScreenDestination())
             },
-            text = "минимальные баллы")
+            text = "Минимальные баллы по ЕГЭ")
         Text(
             modifier = Modifier.clickable{
                 navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.PERSONAL_AREA.url
+                    url = Page.SEARCH_BACHELORS_PROGRAMS.url
                 ))
             },
-            text = "интент")
+            text = "Подобрать направление обучения")
+        Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             modifier = Modifier.clickable{
                 navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.EDUCATIONAL_PLANS.url
+                    url = Page.HOSTEL.url
                 ))
             },
-            text = "медленно и скачка")
+            text = "Общежития")
+        Text(
+            modifier = Modifier.clickable{
+                navigator.navigate(direction = AchievementsScreenDestination())
+            },
+            text = "Индивидуальные достижения")
+        Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             modifier = Modifier.clickable{
                 navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.MINIMUM_POINTS.url
+                    url = Page.CONTRACT.url
                 ))
             },
-            text = "нормально")
+            text = "Контракт")
+        Text(
+            modifier = Modifier.clickable{
+                navigator.navigate(direction = WebViewScreenDestination(
+                    url = Page.ACCEPTANCE_OF_DOCUMENTS.url
+                ))
+            },
+            text = "Документы")
+        Text(
+            modifier = Modifier.clickable{
+                navigator.navigate(direction = RaitingScreenDestination())
+            },
+            text = "Рейтинговые списки")
     }
 }

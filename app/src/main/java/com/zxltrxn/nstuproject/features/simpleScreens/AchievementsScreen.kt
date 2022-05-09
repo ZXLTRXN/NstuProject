@@ -1,17 +1,19 @@
-package com.zxltrxn.nstuproject.features.parsing.recruiting_plan
+package com.zxltrxn.nstuproject.features.simpleScreens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination
 @Composable
-fun RecruitingPlanScreen(
+fun AchievementsScreen(
+    navigator: DestinationsNavigator,
     modifier:Modifier = Modifier
 ){
     Column() {
-        Text("план набора")
+        Text("достижения")
     }
 }

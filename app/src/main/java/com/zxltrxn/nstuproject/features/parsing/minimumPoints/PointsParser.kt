@@ -1,9 +1,9 @@
-package com.zxltrxn.nstuproject.features.parsing.minimum_points.data
+package com.zxltrxn.nstuproject.features.parsing.minimumPoints
 
 import com.zxltrxn.nstuproject.features.parsing.Parser
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsData
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsTable
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.SubjectWithPoints
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsTable
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.SubjectWithPoints
 import org.jsoup.nodes.Document
 import java.io.IOException
 

@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.parsing.minimum_points.presentation
+package com.zxltrxn.nstuproject.features.parsing.minimumPoints.presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,11 +13,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.R
-import com.zxltrxn.nstuproject.common_composable.ErrorMessage
-import com.zxltrxn.nstuproject.common_composable.Header
-import com.zxltrxn.nstuproject.common_composable.LoadingIndicator
-import com.zxltrxn.nstuproject.common_composable.Subtitle
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.SubjectWithPoints
+import com.zxltrxn.nstuproject.commonComposable.ErrorMessage
+import com.zxltrxn.nstuproject.commonComposable.Header
+import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
+import com.zxltrxn.nstuproject.commonComposable.Subtitle
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.SubjectWithPoints
 import com.zxltrxn.nstuproject.ui.spacing
 
 @Destination
