@@ -9,5 +9,6 @@ data class UiState(
 ){
     sealed class Error{
         object NetworkError:Error()
+        object SourceError: Error()
     }
 }

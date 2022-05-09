@@ -25,7 +25,7 @@ class PointsVM @Inject constructor(
 
     private fun fetchData(){
         _uiState.value = UiState(isLoading = true)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch() {
             when(val resource = getData()){
                 is Resource.Success ->{
                     _uiState.value = resource.data?.let{

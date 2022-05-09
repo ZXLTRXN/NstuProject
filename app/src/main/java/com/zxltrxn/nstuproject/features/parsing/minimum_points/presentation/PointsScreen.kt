@@ -20,8 +20,7 @@ import com.zxltrxn.nstuproject.common_composable.Subtitle
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.SubjectWithPoints
 import com.zxltrxn.nstuproject.ui.spacing
 
-
-@Destination(start = true)
+@Destination
 @Composable
 fun PointsScreen(
     modifier: Modifier = Modifier,
@@ -56,6 +55,9 @@ fun PointsScreen(
     when(uiState.error){
         UiState.Error.NetworkError -> {
             ErrorMessage(stringResource(id = R.string.network_error))
+        }
+        UiState.Error.SourceError -> {
+            ErrorMessage(stringResource(id = R.string.source_error))
         }
         else -> {}
     }

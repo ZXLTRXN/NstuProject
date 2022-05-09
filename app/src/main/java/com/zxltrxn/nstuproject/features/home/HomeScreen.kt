@@ -16,8 +16,7 @@ import com.zxltrxn.nstuproject.features.destinations.RecruitingPlanScreenDestina
 import com.zxltrxn.nstuproject.features.destinations.PointsScreenDestination
 
 
-@Destination
-//@Destination(start = true)
+@Destination(start = true)
 @Composable
 fun HomeScreen(
     navigator:DestinationsNavigator

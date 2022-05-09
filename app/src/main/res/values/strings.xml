@@ -3,5 +3,6 @@
     <string name="home_screen_name">Главная</string>
     <string name="contacts_screen_name">Контакты</string>
     <string name="network_error">Сеть недоступна</string>
+    <string name="source_error">Ресурс недоступен</string>
 
 </resources>

@@ -1,9 +1,9 @@
-package com.zxltrxn.nstuproject.features.parsing.minimum_points.di
+package com.zxltrxn.nstuproject.features.parsing.di
 
 import com.zxltrxn.nstuproject.features.parsing.Parser
+import com.zxltrxn.nstuproject.features.parsing.ParserRepo
+import com.zxltrxn.nstuproject.features.parsing.ParserRepoImpl
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.data.PointsParser
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.data.PointsRepoImpl
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.PointsRepo
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsData
 import dagger.Module
 import dagger.Provides
@@ -14,13 +14,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class DataModule {
-
-//    @Provides
-//    @Singleton
-//    fun provideStorage(@ApplicationContext context:Context): Storage{
-//        return SharedPrefsStorage(context = context)
-//    }
-
     @Provides
     @Singleton
     fun providePointsParser(): Parser<PointsData> {
@@ -29,7 +22,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providePointsRepo(parser: Parser<PointsData>): PointsRepo {
-        return PointsRepoImpl(parser)
+    fun provideParserRepo(pointsParser: Parser<PointsData>): ParserRepo {
+        return ParserRepoImpl(pointsParser)
     }
+
 }

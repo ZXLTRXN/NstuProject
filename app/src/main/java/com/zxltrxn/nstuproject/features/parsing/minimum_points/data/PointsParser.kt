@@ -1,14 +1,9 @@
 package com.zxltrxn.nstuproject.features.parsing.minimum_points.data
 
-import com.zxltrxn.nstuproject.features.Page
 import com.zxltrxn.nstuproject.features.parsing.Parser
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsData
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.PointsTable
 import com.zxltrxn.nstuproject.features.parsing.minimum_points.domain.model.SubjectWithPoints
-import com.zxltrxn.nstuproject.features.parsing.minimum_points.presentation.SubjectRow
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.IOException
 

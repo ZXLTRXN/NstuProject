@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.zxltrxn.nstuproject.R
-import com.zxltrxn.nstuproject.features.destinations.ContactsScreenDestination
+import com.zxltrxn.nstuproject.features.Page
 import com.zxltrxn.nstuproject.features.destinations.HomeScreenDestination
 import com.zxltrxn.nstuproject.features.destinations.WebViewScreenDestination
 import java.net.URLEncoder
@@ -19,7 +19,7 @@ enum class BottomBarDestination(
     @StringRes val label:Int
 ){
     Home(HomeScreenDestination, Icons.Default.Home, R.string.home_screen_name),
-    Contacts(ContactsScreenDestination, Icons.Default.Phone, R.string.contacts_screen_name),
+//    Contacts(WebViewScreenDestination(url = Page.RECRUITING_PLAN.url), Icons.Default.Phone, R.string.contacts_screen_name),
 }
 
 

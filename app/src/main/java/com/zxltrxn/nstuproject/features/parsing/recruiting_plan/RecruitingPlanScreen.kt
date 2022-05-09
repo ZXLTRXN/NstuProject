@@ -12,6 +12,6 @@ fun RecruitingPlanScreen(
     modifier:Modifier = Modifier
 ){
     Column() {
-        Text("aaaaaaaaaaa")
+        Text("план набора")
     }
 }
