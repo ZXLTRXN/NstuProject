@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
                         BottomNavigationBar(navController = navController)
                     }
-                ){ contentPadding ->
+                ) { contentPadding ->
                     DestinationsNavHost(
                         modifier = Modifier.padding(contentPadding),
                         navGraph = NavGraphs.root,

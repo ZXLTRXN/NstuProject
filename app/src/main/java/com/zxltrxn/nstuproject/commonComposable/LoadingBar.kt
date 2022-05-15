@@ -12,21 +12,21 @@ import androidx.compose.ui.zIndex
 import com.zxltrxn.nstuproject.ui.spacing
 
 @Composable
-fun LoadingIndicator(zIndex:Float = 2F){
+fun LoadingIndicator(zIndex: Float = 2F) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .zIndex(zIndex)
             .padding(vertical = MaterialTheme.spacing.extraSmall),
         contentAlignment = Alignment.TopCenter
-    ){
+    ) {
 //        Surface(
 //            shape = CircleShape,
 //            elevation = MaterialTheme.elevation.small
 //        ) {
-            CircularProgressIndicator(
-                color = MaterialTheme.colors.primary
-            )
+        CircularProgressIndicator(
+            color = MaterialTheme.colors.primary
+        )
 //        }
     }
 }

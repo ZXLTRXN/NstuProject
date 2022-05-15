@@ -9,8 +9,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 @Destination
 @Composable
 fun RaitingScreen(
-    modifier:Modifier = Modifier
-){
+    modifier: Modifier = Modifier
+) {
     Column() {
         Text("списки")
     }

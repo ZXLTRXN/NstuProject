@@ -1,6 +1,6 @@
 package com.zxltrxn.nstuproject.features
 
-enum class Page(val url:String) {
+enum class Page(val url: String) {
     PHONE("https://www.nstu.ru/entrance/committee"),  // check криво не нужно вообще
     COMPETITION("https://www.nstu.ru/entrance/committee/completition2020"),// заменить напр названиями не обязательно, тк старое
     COMPETITION21("https://www.nstu.ru/entrance/admission_campaign/current_numbers"), // пусто

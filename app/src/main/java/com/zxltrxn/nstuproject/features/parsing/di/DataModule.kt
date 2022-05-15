@@ -1,9 +1,9 @@
 package com.zxltrxn.nstuproject.features.parsing.di
 
-import com.zxltrxn.nstuproject.features.parsing.Parser
-import com.zxltrxn.nstuproject.features.parsing.ParserRepo
-import com.zxltrxn.nstuproject.features.parsing.ParserRepoImpl
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.PointsParser
+import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
+import com.zxltrxn.nstuproject.features.parsing.commonData.ParserRepo
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.ParserRepoImpl
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.PointsParser
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
 import dagger.Module
 import dagger.Provides

@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 data class Spacing(
-    val default:Dp = 0.dp,
+    val default: Dp = 0.dp,
     val extraSmall: Dp = 6.dp, //верт отступы от подзаголовка
     val small: Dp = 10.dp, // верт отступы от заголовка
     val medium: Dp = 16.dp, // горизонт отступы от краев
@@ -18,7 +18,7 @@ data class Spacing(
 
 val LocalSpacing = compositionLocalOf { Spacing() }
 
-val MaterialTheme.spacing:Spacing
-@Composable
-@ReadOnlyComposable
-get() = LocalSpacing.current
+val MaterialTheme.spacing: Spacing
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalSpacing.current

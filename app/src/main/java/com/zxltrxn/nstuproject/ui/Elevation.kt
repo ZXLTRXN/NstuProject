@@ -9,13 +9,13 @@ import androidx.compose.ui.unit.dp
 
 data class Elevation(
     val small: Dp = 5.dp,
-    val medium:Dp = 9.dp,
-    val large:Dp = 13.dp
+    val medium: Dp = 9.dp,
+    val large: Dp = 13.dp
 )
 
 val LocalElevation = compositionLocalOf { Elevation() }
 
-val MaterialTheme.elevation:Elevation
+val MaterialTheme.elevation: Elevation
     @Composable
     @ReadOnlyComposable
     get() = LocalElevation.current

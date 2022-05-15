@@ -1,6 +1,5 @@
 package com.zxltrxn.nstuproject.features.parsing.minimumPoints.data
 
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.PointsParser
 import org.junit.Assert
 import org.junit.Test
 

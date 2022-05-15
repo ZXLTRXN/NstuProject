@@ -23,7 +23,7 @@ fun BottomNavigationBar(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    val currentDestination:Destination? = navController.currentBackStackEntryAsState()
+    val currentDestination: Destination? = navController.currentBackStackEntryAsState()
         .value?.navDestination
     BottomNavigation(
         modifier = modifier,
@@ -48,7 +48,7 @@ fun BottomNavigationBar(
                             imageVector = item.icon,
                             contentDescription = stringResource(id = item.label)
                         )
-                        if(isSelected) {
+                        if (isSelected) {
                             Text(
                                 text = stringResource(id = item.label),
                                 textAlign = TextAlign.Center,

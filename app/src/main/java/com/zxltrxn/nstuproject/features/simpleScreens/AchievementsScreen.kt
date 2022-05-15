@@ -11,8 +11,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun AchievementsScreen(
     navigator: DestinationsNavigator,
-    modifier:Modifier = Modifier
-){
+    modifier: Modifier = Modifier
+) {
     Column() {
         Text("достижения")
     }

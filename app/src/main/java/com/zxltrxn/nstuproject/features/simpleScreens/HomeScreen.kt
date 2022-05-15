@@ -19,60 +19,75 @@ import com.zxltrxn.nstuproject.features.destinations.RaitingScreenDestination
 @Destination(start = true)
 @Composable
 fun HomeScreen(
-    navigator:DestinationsNavigator
+    navigator: DestinationsNavigator
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally,
 
-    ) {
+        ) {
         Text(
-            modifier = Modifier.clickable{
+            modifier = Modifier.clickable {
                 navigator.navigate(direction = PointsScreenDestination())
             },
-            text = "Минимальные баллы по ЕГЭ")
+            text = "Минимальные баллы по ЕГЭ"
+        )
         Text(
-            modifier = Modifier.clickable{
-                navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.SEARCH_BACHELORS_PROGRAMS.url
-                ))
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
+                        url = Page.SEARCH_BACHELORS_PROGRAMS.url
+                    )
+                )
             },
-            text = "Подобрать направление обучения")
+            text = "Подобрать направление обучения"
+        )
         Spacer(modifier = Modifier.height(5.dp))
 
         Text(
-            modifier = Modifier.clickable{
-                navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.HOSTEL.url
-                ))
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
+                        url = Page.HOSTEL.url
+                    )
+                )
             },
-            text = "Общежития")
+            text = "Общежития"
+        )
         Text(
-            modifier = Modifier.clickable{
+            modifier = Modifier.clickable {
                 navigator.navigate(direction = AchievementsScreenDestination())
             },
-            text = "Индивидуальные достижения")
+            text = "Индивидуальные достижения"
+        )
         Spacer(modifier = Modifier.height(5.dp))
 
         Text(
-            modifier = Modifier.clickable{
-                navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.CONTRACT.url
-                ))
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
+                        url = Page.CONTRACT.url
+                    )
+                )
             },
-            text = "Контракт")
+            text = "Контракт"
+        )
         Text(
-            modifier = Modifier.clickable{
-                navigator.navigate(direction = WebViewScreenDestination(
-                    url = Page.ACCEPTANCE_OF_DOCUMENTS.url
-                ))
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
+                        url = Page.ACCEPTANCE_OF_DOCUMENTS.url
+                    )
+                )
             },
-            text = "Документы")
+            text = "Документы"
+        )
         Text(
-            modifier = Modifier.clickable{
+            modifier = Modifier.clickable {
                 navigator.navigate(direction = RaitingScreenDestination())
             },
-            text = "Рейтинговые списки")
+            text = "Рейтинговые списки"
+        )
     }
 }
