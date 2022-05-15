@@ -19,30 +19,21 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.features.Page
 
-
 @SuppressLint("SetJavaScriptEnabled")
 @Destination
 @Composable
 fun WebViewScreen(
-    url: String?,
+    url: String,
     cacheMode: Int = WebSettings.LOAD_CACHE_ELSE_NETWORK
 ) {
-    val TAG = "WebViewScreen"
-    val urlHostWithIntent: List<String> = listOf("ciu.nstu.ru")
-    val allowedUrlHost: List<String> = listOf(
-        "www.nstu.ru", "www.avtf.nstu.ru", "www.fla.nstu.ru", "www.mtf.nstu.ru",
-        "www.fma.nstu.ru", "www.fpmi.nstu.ru", "www.ref.nstu.ru", "www.ftf.nstu.ru",
-        "www.fen.nstu.ru", "www.fb.nstu.ru", "www.fgo.nstu.ru", "www.istr.nstu.ru"
-    )
-
     var webView: WebView? = null
     val context = LocalContext.current
     val isDarkTheme = isSystemInDarkTheme()
 
-    var backEnabled by remember { mutableStateOf(false) }
-    var isLoading by remember { mutableStateOf(true) }
+    val backEnabled = remember { mutableStateOf(false) }
+    val isLoading = remember { mutableStateOf(true) }
 
-    if (isLoading) {
+    if (isLoading.value) {
         LoadingIndicator()
     }
 
@@ -54,60 +45,22 @@ fun WebViewScreen(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
-
-                webViewClient = object : WebViewClient() {
-
-                    override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                        backEnabled = view?.canGoBack() ?: false
-                        if (!isLoading) isLoading = true
-                        view?.visibility = View.INVISIBLE
-                    }
-
-                    override fun shouldOverrideUrlLoading(
-                        view: WebView?,
-                        request: WebResourceRequest?
-                    ): Boolean {
-                        Log.d(TAG, "shouldOverrideUrlLoading: ${request?.url?.host}")
-                        return if (request?.url?.host in urlHostWithIntent) {
-                            Log.d(TAG, "shouldOverrideUrlLoading: intent")
-                            view?.context?.startActivity(
-                                Intent(Intent.ACTION_VIEW, request?.url)
-                            )
-                            true
-                        } else {
-                            request?.url?.host !in allowedUrlHost
-                        }
-                    }
-
-                    override fun onPageFinished(view: WebView?, url: String?) {
-                        view?.loadUrl(
-                            "javascript:(function() { " +
-                                    "document.getElementsByClassName('header-mobile')[0].style.display=\"none\"; " +
-                                    "document.getElementsByClassName('breadcrumbs')[0].style.display=\"none\"; " +
-                                    "document.getElementsByClassName('page-footer')[0].style.display=\"none\"; " +
-                                    "})()"
-                        )
-                        isLoading = false
-                        view?.visibility = View.VISIBLE
-                    }
-                }
+                webViewClient = CustomWebViewClient(isLoading, backEnabled)
                 settings.cacheMode = cacheMode
                 settings.javaScriptEnabled = true
+                settings.useWideViewPort = true
                 webView = this
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && isDarkTheme) {
                     settings.forceDark = WebSettings.FORCE_DARK_ON
                 }
-
-                url?.let {
-                    loadUrl(it)
-                }
+                loadUrl(url)
             }
         }, update = {
             webView = it
         })
 
-    BackHandler(enabled = backEnabled) {
+    BackHandler(enabled = backEnabled.value) {
         webView?.goBack()
     }
 }
@@ -120,25 +73,14 @@ fun ContactsWebView() = WebViewScreen(Page.PHONE.url)
 @Composable
 fun PersonalAreaWebView() = WebViewScreen(Page.PERSONAL_AREA.url)
 
+fun View.smoothShow() {
+    this.apply {
+        alpha = 0f
+        visibility = View.VISIBLE
 
-//@SuppressLint("SetJavaScriptEnabled")
-//@Destination
-//@Composable
-//fun WebViewScreen(
-//    url:String?,
-//    cacheMode:Int = WebSettings.LOAD_CACHE_ELSE_NETWORK
-//){
-//    val context = LocalContext.current
-//    val factory = WebViewVM.Factory(context)
-//
-//    val viewModel = ViewModelProvider(context, factory).get(WebViewVM::class.java)
-//
-//
-//}
-
-
-//val dir: File = context.cacheDir
-//if (dir.exists())
-//Log.d(TAG, "shouldOverrideUrlLoading: yes Cache ${dir.listFiles()}")
-//else
-//Log.d(TAG, "shouldOverrideUrlLoading: noCache")
+        animate()
+            .alpha(1f)
+            .setDuration(300)
+            .setListener(null)
+    }
+}

@@ -25,7 +25,6 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally,
-
         ) {
         Text(
             modifier = Modifier.clickable {
@@ -41,19 +40,30 @@ fun HomeScreen(
                     )
                 )
             },
-            text = "Подобрать направление обучения"
+            text = "Подобрать направление обучения по предметам ЕГЭ (так же баллы прошлых лет и набор)"
         )
-        Spacer(modifier = Modifier.height(5.dp))
-
         Text(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.HOSTEL.url
+                        url = Page.ENTRANCE_EXAMINATIONS.url
                     )
                 )
             },
-            text = "Общежития"
+            text = "Перечень вступительных испытаний по направлениям(доп)"
+        )
+        Text(
+            text = "баллы прошлого года(доп)"
+        )
+        Text(
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
+                        url = Page.RECRUITING_PLAN.url
+                    )
+                )
+            },
+            text = "План набора на текущий год(доп)"
         )
         Text(
             modifier = Modifier.clickable {
@@ -67,11 +77,53 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
+                        url = Page.EDUCATIONAL_PLANS.url
+                    )
+                )
+            },
+            text = "Учебные планы"
+        )
+        Text(
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
+                        url = Page.GRANTS.url
+                    )
+                )
+            },
+            text = "Стипендии"
+        )
+        Text(
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
+                        url = Page.HOSTEL.url
+                    )
+                )
+            },
+            text = "Общежития"
+        )
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Text(
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
                         url = Page.CONTRACT.url
                     )
                 )
             },
-            text = "Контракт"
+            text = "О контракте"
+        )
+        Text(
+            modifier = Modifier.clickable {
+                navigator.navigate(
+                    direction = WebViewScreenDestination(
+                        url = Page.COST.url
+                    )
+                )
+            },
+            text = "Стоимость обучения"
         )
         Text(
             modifier = Modifier.clickable {
@@ -83,6 +135,8 @@ fun HomeScreen(
             },
             text = "Документы"
         )
+
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
             modifier = Modifier.clickable {
                 navigator.navigate(direction = RaitingScreenDestination())
