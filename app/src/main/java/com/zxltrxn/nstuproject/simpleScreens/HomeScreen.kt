@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.simpleScreens
+package com.zxltrxn.nstuproject.simpleScreens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,11 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.zxltrxn.nstuproject.features.destinations.WebViewScreenDestination
+import com.zxltrxn.nstuproject.destinations.WebViewScreenDestination
 import com.zxltrxn.nstuproject.features.Page
-import com.zxltrxn.nstuproject.features.destinations.AchievementsScreenDestination
-import com.zxltrxn.nstuproject.features.destinations.PointsScreenDestination
-import com.zxltrxn.nstuproject.features.destinations.RaitingScreenDestination
+import com.zxltrxn.nstuproject.destinations.AchievementsScreenDestination
+import com.zxltrxn.nstuproject.destinations.PointsScreenDestination
+import com.zxltrxn.nstuproject.destinations.RaitingScreenDestination
 
 
 @Destination(start = true)

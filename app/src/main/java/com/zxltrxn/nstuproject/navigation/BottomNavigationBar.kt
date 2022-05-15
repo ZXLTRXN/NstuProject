@@ -12,9 +12,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.ramcosta.composedestinations.navigation.navigateTo
-import com.zxltrxn.nstuproject.features.destinations.Destination
-import com.zxltrxn.nstuproject.features.destinations.HomeScreenDestination
-import com.zxltrxn.nstuproject.features.navDestination
+import com.zxltrxn.nstuproject.destinations.Destination
+import com.zxltrxn.nstuproject.destinations.HomeScreenDestination
+import com.zxltrxn.nstuproject.navDestination
 import com.zxltrxn.nstuproject.ui.elevation
 
 

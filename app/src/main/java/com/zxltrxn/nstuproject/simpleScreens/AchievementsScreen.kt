@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.simpleScreens
+package com.zxltrxn.nstuproject.simpleScreens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text

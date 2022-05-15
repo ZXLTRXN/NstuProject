@@ -8,7 +8,10 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.zxltrxn.nstuproject.R
-import com.zxltrxn.nstuproject.features.destinations.*
+import com.zxltrxn.nstuproject.destinations.ContactsWebViewDestination
+import com.zxltrxn.nstuproject.destinations.HomeScreenDestination
+import com.zxltrxn.nstuproject.destinations.PersonalAreaWebViewDestination
+
 
 enum class BottomBarDestination(
     val direction: DirectionDestinationSpec,

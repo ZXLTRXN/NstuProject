@@ -8,7 +8,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
-import com.zxltrxn.nstuproject.features.NavGraphs
 import com.zxltrxn.nstuproject.ui.theme.NSTUProjectTheme
 import com.zxltrxn.nstuproject.navigation.BottomNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
