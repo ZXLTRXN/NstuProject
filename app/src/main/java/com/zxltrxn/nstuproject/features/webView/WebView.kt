@@ -45,7 +45,8 @@ fun WebViewScreen(
                 webViewClient = CustomWebViewClient(isLoading, backEnabled)
                 settings.cacheMode = cacheMode
                 settings.javaScriptEnabled = true
-//                settings.useWideViewPort = true
+                settings.loadWithOverviewMode = true
+                settings.useWideViewPort = true
                 webView = this
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && isDarkTheme) {

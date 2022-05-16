@@ -1,8 +1,8 @@
 package com.zxltrxn.nstuproject.features.parsing.commonDomain
 
-sealed interface Resource<T> {
+sealed interface Resource<out T> {
     data class Success<T>(val data: T) : Resource<T>
-    data class Error<T>(val message: LocalizeString, val errorCode: Int) : Resource<T>
+    data class Error(val message: LocalizeString, val errorCode: Int) : Resource<Nothing>
 }
 
 /*
