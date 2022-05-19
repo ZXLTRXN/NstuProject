@@ -13,7 +13,7 @@ import com.zxltrxn.nstuproject.destinations.WebViewScreenDestination
 import com.zxltrxn.nstuproject.features.Page
 import com.zxltrxn.nstuproject.destinations.AchievementsScreenDestination
 import com.zxltrxn.nstuproject.destinations.PointsScreenDestination
-import com.zxltrxn.nstuproject.destinations.RaitingScreenDestination
+import com.zxltrxn.nstuproject.destinations.RatingScreenDestination
 
 
 @Destination(start = true)
@@ -36,7 +36,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.SEARCH_BACHELORS_PROGRAMS.url
+                        page = Page.SEARCH_BACHELORS_PROGRAMS
                     )
                 )
             },
@@ -46,7 +46,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.ENTRANCE_EXAMINATIONS.url
+                        page = Page.ENTRANCE_EXAMINATIONS
                     )
                 )
             },
@@ -59,7 +59,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.RECRUITING_PLAN.url
+                        page = Page.RECRUITING_PLAN
                     )
                 )
             },
@@ -77,7 +77,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.EDUCATIONAL_PLANS.url
+                        page = Page.EDUCATIONAL_PLANS
                     )
                 )
             },
@@ -87,7 +87,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.GRANTS.url
+                        page = Page.GRANTS
                     )
                 )
             },
@@ -97,7 +97,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.HOSTEL.url
+                        page = Page.HOSTEL
                     )
                 )
             },
@@ -109,7 +109,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.CONTRACT.url
+                        page = Page.CONTRACT
                     )
                 )
             },
@@ -119,7 +119,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.COST.url
+                        page = Page.COST
                     )
                 )
             },
@@ -129,7 +129,7 @@ fun HomeScreen(
             modifier = Modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        url = Page.ACCEPTANCE_OF_DOCUMENTS.url
+                        page = Page.ACCEPTANCE_OF_DOCUMENTS
                     )
                 )
             },
@@ -139,7 +139,7 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             modifier = Modifier.clickable {
-                navigator.navigate(direction = RaitingScreenDestination())
+                navigator.navigate(direction = RatingScreenDestination())
             },
             text = "Рейтинговые списки"
         )

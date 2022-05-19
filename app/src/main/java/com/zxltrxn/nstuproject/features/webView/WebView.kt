@@ -20,8 +20,7 @@ import com.zxltrxn.nstuproject.features.Page
 @Destination
 @Composable
 fun WebViewScreen(
-    url: String,
-    cacheMode: Int = WebSettings.LOAD_CACHE_ELSE_NETWORK
+    page: Page
 ) {
     var webView: WebView? = null
     val context = LocalContext.current
@@ -42,8 +41,8 @@ fun WebViewScreen(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
-                webViewClient = CustomWebViewClient(isLoading, backEnabled)
-                settings.cacheMode = cacheMode
+                webViewClient = CustomWebViewClient(isLoading, backEnabled, page.stretchContent)
+                settings.cacheMode = page.cacheMode
                 settings.javaScriptEnabled = true
                 settings.loadWithOverviewMode = true
                 settings.useWideViewPort = true
@@ -52,7 +51,7 @@ fun WebViewScreen(
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && isDarkTheme) {
                     settings.forceDark = WebSettings.FORCE_DARK_ON
                 }
-                loadUrl(url)
+                loadUrl(page.url)
             }
         }, update = {
             webView = it
@@ -65,11 +64,11 @@ fun WebViewScreen(
 
 @Destination
 @Composable
-fun ContactsWebView() = WebViewScreen(Page.PHONE.url)
+fun ContactsWebView() = WebViewScreen(Page.PHONE)
 
 @Destination
 @Composable
-fun PersonalAreaWebView() = WebViewScreen(Page.PERSONAL_AREA.url)
+fun PersonalAreaWebView() = WebViewScreen(Page.PERSONAL_AREA)
 
 fun View.smoothShow() {
     this.apply {

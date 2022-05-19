@@ -12,7 +12,7 @@ import com.zxltrxn.nstuproject.features.Page
 
 @Destination
 @Composable
-fun AchievementsScreen(
+fun RatingScreen(
     navigator: DestinationsNavigator,
     modifier: Modifier = Modifier
 ) {
@@ -21,21 +21,11 @@ fun AchievementsScreen(
             modifier = modifier.clickable {
                 navigator.navigate(
                     direction = WebViewScreenDestination(
-                        page = Page.INDIVIDUAL_ACHIEVEMENTS
+                        page = Page.RATING_LIST
                     )
                 )
             },
-            text = "Индивидуальные достижения"
-        )
-        Text(
-            modifier = modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.SPECIAL_RIGHTS_FOR_WINNERS
-                    )
-                )
-            },
-            text = "Особые права, предоставляемые победителям и призерам олимпиад"
+            text = "Списки"
         )
     }
 }
