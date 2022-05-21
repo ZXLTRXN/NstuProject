@@ -6,6 +6,7 @@ import com.zxltrxn.nstuproject.features.Page
 import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
 import com.zxltrxn.nstuproject.features.parsing.commonData.ParserRepo
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.plan.data.model.PlanData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -13,12 +14,19 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class ParserRepoImpl @Inject constructor(
-    private val pointsParser: Parser<PointsData>
+    private val pointsParser: Parser<PointsData>,
+    private val planParser: Parser<PlanData>
 ) : ParserRepo {
     override suspend fun getPointsData(): Resource<PointsData> =
         tryExecute {
             pointsParser.execute(Page.MINIMUM_POINTS.url)
         }
+
+    override suspend fun getPlanData(): Resource<PlanData> =
+        tryExecute {
+            planParser.execute(Page.RECRUITING_PLAN.url)
+        }
+
 
     private suspend fun <T> tryExecute(execute: suspend () -> T): Resource<T> =
         withContext(Dispatchers.IO) {

@@ -5,6 +5,8 @@ import com.zxltrxn.nstuproject.features.parsing.commonData.ParserRepo
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.ParserRepoImpl
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.PointsParser
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.plan.data.PlanParser
+import com.zxltrxn.nstuproject.features.parsing.plan.data.model.PlanData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,8 +24,17 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideParserRepo(pointsParser: Parser<PointsData>): ParserRepo {
-        return ParserRepoImpl(pointsParser)
+    fun providePlanParser(): Parser<PlanData> {
+        return PlanParser()
+    }
+
+    @Provides
+    @Singleton
+    fun provideParserRepo(
+        pointsParser: Parser<PointsData>,
+        planParser: Parser<PlanData>
+    ): ParserRepo {
+        return ParserRepoImpl(pointsParser, planParser)
     }
 
 }

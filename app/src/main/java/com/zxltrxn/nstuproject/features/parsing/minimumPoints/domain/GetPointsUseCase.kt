@@ -5,6 +5,6 @@ import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
 import javax.inject.Inject
 
-class GetPointsDataUseCase @Inject constructor(private val repo: ParserRepo) {
+class GetPointsUseCase @Inject constructor(private val repo: ParserRepo) {
     suspend operator fun invoke(): Resource<PointsData> = repo.getPointsData()
 }
