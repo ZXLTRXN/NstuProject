@@ -16,7 +16,7 @@ import com.zxltrxn.nstuproject.commonComposable.ErrorMessage
 import com.zxltrxn.nstuproject.commonComposable.Header
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.commonComposable.Subtitle
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.SubjectWithPoints
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Subject
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.presentation.PointsVM.UiState
 import com.zxltrxn.nstuproject.ui.spacing
 
@@ -41,9 +41,9 @@ fun PointsScreen(
                 Header(text = (uiState as UiState.Loaded).data.title)
 
                 LazyColumn() {
-                    items((uiState as UiState.Loaded).data.tables) { table ->
-                        Subtitle(text = table.title)
-                        for (subject in table.items) {
+                    items((uiState as UiState.Loaded).data.bases) { base ->
+                        Subtitle(text = base.title)
+                        for (subject in base.items) {
                             SubjectRow(subject)
                             Spacer(
                                 modifier = Modifier
@@ -62,14 +62,14 @@ fun PointsScreen(
 }
 
 @Composable
-fun SubjectRow(item: SubjectWithPoints) {
+fun SubjectRow(item: Subject) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(0.85f),
-            text = item.subjectName,
+            text = item.name,
         )
         Text(
             modifier = Modifier.align(Alignment.CenterVertically),

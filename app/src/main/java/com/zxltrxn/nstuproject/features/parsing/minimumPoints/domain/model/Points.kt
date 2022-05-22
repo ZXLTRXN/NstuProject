@@ -1,7 +1,7 @@
 package com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model
 
-data class PointsTable(
+data class Points(
     val title: String,
-    var items: List<SubjectWithPoints>
+    val bases: List<PointsOnBase>
 )
 

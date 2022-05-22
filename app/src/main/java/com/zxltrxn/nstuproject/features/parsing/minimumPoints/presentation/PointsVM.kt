@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.LocalizeString
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.GetPointsUseCase
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Points
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -41,7 +41,7 @@ class PointsVM @Inject constructor(
     sealed interface UiState {
         object IsLoading : UiState
         data class Error(val message: LocalizeString) : UiState
-        data class Loaded(val data: PointsData = PointsData(title = "", tables = listOf())) :
+        data class Loaded(val data: Points = Points(title = "", bases = listOf())) :
             UiState
     }
 }

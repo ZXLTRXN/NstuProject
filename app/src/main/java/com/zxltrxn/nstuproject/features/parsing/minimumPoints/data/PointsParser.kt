@@ -1,11 +1,13 @@
 package com.zxltrxn.nstuproject.features.parsing.minimumPoints.data
 
 import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsTable
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.SubjectWithPoints
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.PointsTable
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.SubjectData
 import org.jsoup.nodes.Document
 import java.io.IOException
+import javax.inject.Inject
+import javax.inject.Singleton
 
 class PointsParser : Parser<PointsData>() {
     override suspend fun execute(url: String): PointsData {
@@ -30,8 +32,8 @@ class PointsParser : Parser<PointsData>() {
 
                 pTables[index].items = t.select("tr").map {
                     val row = it.select("td p")
-                    SubjectWithPoints(
-                        subjectName = row.get(0).text(),
+                    SubjectData(
+                        name = row.get(0).text(),
                         points = row.get(1).text().toInt()
                     )
                 }

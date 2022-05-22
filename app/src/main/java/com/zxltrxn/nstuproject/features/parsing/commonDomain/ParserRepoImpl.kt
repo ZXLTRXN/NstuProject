@@ -5,7 +5,9 @@ import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.features.Page
 import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
 import com.zxltrxn.nstuproject.features.parsing.commonData.ParserRepo
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.PointsData
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Points
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.toPoints
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.PlanData
 import com.zxltrxn.nstuproject.features.parsing.plan.domain.model.Plan
 import com.zxltrxn.nstuproject.features.parsing.plan.toPlan
@@ -19,12 +21,16 @@ class ParserRepoImpl @Inject constructor(
     private val pointsParser: Parser<PointsData>,
     private val planParser: Parser<PlanData>
 ) : ParserRepo {
-    override suspend fun getPointsData(): Resource<PointsData> =
-        tryExecute {
-            pointsParser.execute(Page.MINIMUM_POINTS.url)
-        }
 
-    override suspend fun getPlanData(): Resource<Plan> {
+    override suspend fun getPoints(): Resource<Points> {
+        val res = tryExecute { pointsParser.execute(Page.MINIMUM_POINTS.url) }
+        return when (res) {
+            is Resource.Error -> res
+            is Resource.Success -> Resource.Success(res.data.toPoints())
+        }
+    }
+
+    override suspend fun getPlan(): Resource<Plan> {
         val res = tryExecute { planParser.execute(Page.RECRUITING_PLAN.url) }
         return when (res) {
             is Resource.Error -> res
