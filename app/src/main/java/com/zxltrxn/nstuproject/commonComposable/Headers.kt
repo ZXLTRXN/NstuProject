@@ -15,7 +15,13 @@ fun Header(text: String) {
 }
 
 @Composable
-fun Subtitle(text: String) {
+fun Subtitle1(text: String) {
     Text(text = text, style = MaterialTheme.typography.subtitle1)
+    Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
+}
+
+@Composable
+fun Subtitle2(text: String) {
+    Text(text = text, style = MaterialTheme.typography.subtitle2)
     Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
 }

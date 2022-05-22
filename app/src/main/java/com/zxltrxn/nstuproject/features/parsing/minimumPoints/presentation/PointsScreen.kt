@@ -12,12 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.zxltrxn.nstuproject.commonComposable.CustomDivider
 import com.zxltrxn.nstuproject.commonComposable.ErrorMessage
 import com.zxltrxn.nstuproject.commonComposable.Header
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
-import com.zxltrxn.nstuproject.commonComposable.Subtitle
+import com.zxltrxn.nstuproject.commonComposable.Subtitle1
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Subject
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.presentation.PointsVM.UiState
+import com.zxltrxn.nstuproject.features.parsing.minimumPoints.presentation.PointsViewModel.UiState
 import com.zxltrxn.nstuproject.ui.spacing
 
 @Destination
@@ -25,37 +26,33 @@ import com.zxltrxn.nstuproject.ui.spacing
 fun PointsScreen(
     modifier: Modifier = Modifier,
 ) {
-    val vm = hiltViewModel<PointsVM>()
+    val vm = hiltViewModel<PointsViewModel>()
     val uiState by vm.uiState
 
     when (uiState) {
-        is UiState.IsLoading -> {
-            LoadingIndicator()
-        }
+        is UiState.IsLoading -> LoadingIndicator()
         is UiState.Loaded -> {
+            val state = uiState as UiState.Loaded
             Column(
                 modifier = modifier
                     .fillMaxSize()
                     .padding(horizontal = MaterialTheme.spacing.medium)
             ) {
-                Header(text = (uiState as UiState.Loaded).data.title)
+                Header(text = state.data.title)
 
                 LazyColumn() {
-                    items((uiState as UiState.Loaded).data.bases) { base ->
-                        Subtitle(text = base.title)
-                        for (subject in base.items) {
+                    items(state.data.bases) { base ->
+                        Subtitle1(text = base.title)
+                        val last = base.items.lastIndex
+                        base.items.mapIndexed { i, subject ->
                             SubjectRow(subject)
-                            Spacer(
-                                modifier = Modifier
-                                    .height(MaterialTheme.spacing.extraSmall)
-                            )
+                            CustomDivider(index = i, lastIndex = last)
                         }
                     }
                 }
             }
         }
         is UiState.Error -> {
-
             ErrorMessage(message = (uiState as UiState.Error).message.getString(context = LocalContext.current))
         }
     }

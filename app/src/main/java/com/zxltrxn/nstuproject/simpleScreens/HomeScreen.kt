@@ -10,10 +10,11 @@ import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.zxltrxn.nstuproject.destinations.WebViewScreenDestination
-import com.zxltrxn.nstuproject.features.Page
 import com.zxltrxn.nstuproject.destinations.AchievementsScreenDestination
 import com.zxltrxn.nstuproject.destinations.PointsScreenDestination
+import com.zxltrxn.nstuproject.destinations.PlanScreenDestination
 import com.zxltrxn.nstuproject.destinations.RatingScreenDestination
+import com.zxltrxn.nstuproject.features.Page
 
 
 @Destination(start = true)
@@ -25,7 +26,7 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+    ) {
         Text(
             modifier = Modifier.clickable {
                 navigator.navigate(direction = PointsScreenDestination())
@@ -57,11 +58,7 @@ fun HomeScreen(
         )
         Text(
             modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.RECRUITING_PLAN
-                    )
-                )
+                navigator.navigate(direction = PlanScreenDestination())
             },
             text = "План набора на текущий год(доп)"
         )

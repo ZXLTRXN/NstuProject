@@ -13,9 +13,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
-class PointsVM @Inject constructor(
+class PointsViewModel @Inject constructor(
     private val getData: GetPointsUseCase
 ) : ViewModel() {
     private val _uiState: MutableState<UiState> = mutableStateOf(UiState.IsLoading)
@@ -41,7 +40,6 @@ class PointsVM @Inject constructor(
     sealed interface UiState {
         object IsLoading : UiState
         data class Error(val message: LocalizeString) : UiState
-        data class Loaded(val data: Points = Points(title = "", bases = listOf())) :
-            UiState
+        data class Loaded(val data: Points) : UiState
     }
 }
