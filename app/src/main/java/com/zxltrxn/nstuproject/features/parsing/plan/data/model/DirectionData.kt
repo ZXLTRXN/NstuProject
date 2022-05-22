@@ -1,6 +1,6 @@
 package com.zxltrxn.nstuproject.features.parsing.plan.data.model
 
-data class Direction(
+data class DirectionData(
     var name: String,
     var code: String,
     var level: String,

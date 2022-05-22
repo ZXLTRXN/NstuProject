@@ -1,8 +1,8 @@
 package com.zxltrxn.nstuproject.features.parsing.plan.data
 
 import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
-import com.zxltrxn.nstuproject.features.parsing.plan.data.model.Direction
-import com.zxltrxn.nstuproject.features.parsing.plan.data.model.Faculty
+import com.zxltrxn.nstuproject.features.parsing.plan.data.model.DirectionData
+import com.zxltrxn.nstuproject.features.parsing.plan.data.model.FacultyData
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.FormTable
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.PlanData
 import org.jsoup.nodes.Document
@@ -20,25 +20,25 @@ class PlanParser : Parser<PlanData>() {
         val forms: MutableList<FormTable> = mutableListOf()
 
         tables.forEachIndexed { tableIndex, table ->
-            val faculties: MutableList<Faculty> = mutableListOf()
+            val faculties: MutableList<FacultyData> = mutableListOf()
 
             var facultyName: String? = null
-            var directions: MutableList<Direction> = mutableListOf()
+            var directions: MutableList<DirectionData> = mutableListOf()
 
             table.select("tr").map { row ->
                 if (row.hasClass("enrollee-plan__faculty-total")) {
-                    faculties.add(Faculty(name = facultyName!!, directions = directions))
+                    faculties.add(FacultyData(name = facultyName!!, directions = directions))
                     directions = mutableListOf()
                     facultyName = null
                 } else {
-                    var direction: Direction? = null
+                    var direction: DirectionData? = null
                     row.select("td").mapIndexed { index, col ->
                         if (col.hasClass("enrollee-plan__faculty-header"))
                             facultyName = col.text()
                         else {
                             when (index) {
                                 0 -> {
-                                    direction = Direction(
+                                    direction = DirectionData(
                                         code = col.select("span.enrollee-plan__table-code").text(),
                                         name = col.select("span.enrollee-plan__table-direction")
                                             .text(),

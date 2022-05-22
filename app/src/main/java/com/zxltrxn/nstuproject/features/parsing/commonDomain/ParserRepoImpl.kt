@@ -7,6 +7,8 @@ import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
 import com.zxltrxn.nstuproject.features.parsing.commonData.ParserRepo
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.PointsData
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.PlanData
+import com.zxltrxn.nstuproject.features.parsing.plan.domain.model.Plan
+import com.zxltrxn.nstuproject.features.parsing.plan.toPlan
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -22,10 +24,13 @@ class ParserRepoImpl @Inject constructor(
             pointsParser.execute(Page.MINIMUM_POINTS.url)
         }
 
-    override suspend fun getPlanData(): Resource<PlanData> =
-        tryExecute {
-            planParser.execute(Page.RECRUITING_PLAN.url)
+    override suspend fun getPlanData(): Resource<Plan> {
+        val res = tryExecute { planParser.execute(Page.RECRUITING_PLAN.url) }
+        return when (res) {
+            is Resource.Error -> res
+            is Resource.Success -> Resource.Success(res.data.toPlan())
         }
+    }
 
 
     private suspend fun <T> tryExecute(execute: suspend () -> T): Resource<T> =
