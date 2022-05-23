@@ -1,28 +1,42 @@
 package com.zxltrxn.nstuproject.features.parsing.plan.presentation
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ComposeCompilerApi
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
-import com.zxltrxn.nstuproject.commonComposable.CustomDivider
+import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.commonComposable.ErrorMessage
 import com.zxltrxn.nstuproject.commonComposable.Header
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
+import com.zxltrxn.nstuproject.commonComposable.SimpleDivider
 import com.zxltrxn.nstuproject.commonComposable.Subtitle1
 import com.zxltrxn.nstuproject.commonComposable.Subtitle2
 import com.zxltrxn.nstuproject.features.parsing.plan.domain.model.Direction
@@ -46,27 +60,50 @@ fun PlanScreen(
                     .fillMaxSize()
                     .padding(horizontal = MaterialTheme.spacing.medium)
             ) {
+                val expandableVerticalPadding = MaterialTheme.spacing.medium
+                val expandModifier: (MutableState<Boolean>) -> Modifier = { isExpanded ->
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            isExpanded.value = !isExpanded.value
+                        }
+                        .padding(vertical = expandableVerticalPadding)
+                }
+
                 Header(text = state.data.title)
                 LazyColumn {
-                    items(state.data.forms){ form ->
-                        Subtitle1(text = form.title)
-                        for(faculty in form.faculties){
-                            Subtitle2(text = faculty.name)
-                            val last = faculty.directions.lastIndex
-                            faculty.directions.mapIndexed{ i, direction ->
-                                Direction(
-                                    direction = direction
+                    items(state.data.forms) { form ->
+                        val formExpanded = remember { mutableStateOf(false) }
+                        ExpandableRow {
+                            Subtitle1(
+                                modifier = expandModifier(formExpanded),
+                                text = form.title
+                            )
+                        }
+                        if (formExpanded.value) {
+                            for (faculty in form.faculties) {
+                                val facultyExpanded = remember { mutableStateOf(false) }
+                                Subtitle2(
+                                    modifier = expandModifier(facultyExpanded),
+                                    text = faculty.name
                                 )
-                                CustomDivider(index = i, lastIndex = last)
+
+                                if (facultyExpanded.value) {
+                                    faculty.directions.map { direction ->
+                                        val directionExpanded = remember { mutableStateOf(false) }
+                                        Direction(
+                                            direction = direction,
+                                            isExpanded = directionExpanded,
+                                            onClick = {
+                                                directionExpanded.value = !directionExpanded.value
+                                            })
+                                    }
+                                }
                             }
                         }
-                        Divider(modifier = Modifier.height(1.dp))
                     }
-
                 }
             }
-
-
         }
         is UiState.Error -> {
             ErrorMessage(
@@ -79,22 +116,86 @@ fun PlanScreen(
 }
 
 @Composable
-fun Direction(direction: Direction){
-    Row {
-        Text(text = direction.code,
-            style = MaterialTheme.typography.body2)
-        Spacer(modifier = Modifier.width(MaterialTheme.spacing.extraSmall))
-        Text(text = direction.name)
+fun ExpandableRow(content: @Composable RowScope.() -> Unit) {
+    Row() {
+        content()
+//        Image(
+//
+//            painter = painterResource(id = R.drawable.ic_arrow_down),
+//            contentDescription = "open spoiler"
+//        )
     }
-    direction.budget?.let {
-        Row() {
-            Text(text = "бюджет")
-            Spacer(modifier = Modifier.width(MaterialTheme.spacing.extraSmall))
-            Text(text = it)
+}
+
+@Composable
+fun DirectionContentRow(
+    modifier: Modifier = Modifier,
+    title: String, value: String,
+    titleTextStyle: TextStyle = MaterialTheme.typography.body2,
+    valueTextStyle: TextStyle = MaterialTheme.typography.body1
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            modifier = Modifier.fillMaxWidth(0.65f),
+            text = title,
+            style = titleTextStyle
+        )
+        Text(
+            modifier = Modifier.align(Alignment.CenterVertically),
+            text = value,
+            style = valueTextStyle
+        )
+    }
+}
+
+@Composable
+fun Direction(direction: Direction, isExpanded: MutableState<Boolean>, onClick: () -> Unit) {
+    Column() {
+        with(direction) {
+            DirectionContentRow(
+                modifier = Modifier
+                    .clickable { onClick() }
+                    .padding(vertical = MaterialTheme.spacing.extraSmall),
+                title = name, value = code,
+                titleTextStyle = MaterialTheme.typography.body1,
+                valueTextStyle = MaterialTheme.typography.body2
+            )
+
+            if (isExpanded.value) {
+                special?.let {
+                    DirectionContentRow(
+                        title = stringResource(R.string.special), value = it,
+                        titleTextStyle = MaterialTheme.typography.body2,
+                        valueTextStyle = MaterialTheme.typography.body2
+                    )
+                    SimpleDivider()
+                }
+
+                val elements: List<Pair<Int, String?>> = listOf(
+                    Pair(R.string.budget_count, budget),
+                    Pair(R.string.contract_count, contract),
+                    Pair(R.string.quota_count, quota),
+                    Pair(R.string.target_count, target),
+                    Pair(R.string.competitive_group, competitiveGroup),
+                    Pair(R.string.accreditation_period, accreditationPeriod),
+                )
+                val last = elements.lastIndex
+                elements.forEachIndexed { index, pair ->
+                    val (id, value) = pair
+                    value?.let {
+                        DirectionContentRow(
+                            title = stringResource(id = id),
+                            value = it
+                        )
+                        if (index != last) SimpleDivider()
+                    }
+                }
+                SimpleDivider()
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
+            }
         }
     }
-
-
-
-
 }

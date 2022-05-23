@@ -18,5 +18,13 @@ fun CustomDivider(index: Int, lastIndex: Int) {
                 .height(MaterialTheme.spacing.extraSmall)
         )
     else
-        Divider(modifier = Modifier.height(4.dp).padding(top = 3.dp))
+        SimpleDivider()
 }
+
+@Composable
+fun SimpleDivider() =
+    Divider(
+        modifier = Modifier
+            .height(4.dp)
+            .padding(top = 3.dp)
+    )

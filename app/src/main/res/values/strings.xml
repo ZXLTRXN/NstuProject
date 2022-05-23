@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">NSTU Project</string>
+
     <string name="home_screen_name">Главная</string>
     <string name="contacts_screen_name">Контакты</string>
     <string name="personal_area_screen_name">Личный кабинет</string>
+
+    <string name="budget_count">Бюджетных мест</string>
+    <string name="contract_count">Контрактных мест</string>
+    <string name="quota_count">Квота из бюджетных мест</string>
+    <string name="target_count">Целевого приема из бюджетных мест</string>
+    <string name="special">Особые условия</string>
+    <string name="competitive_group">Конкурсная группа</string>
+    <string name="accreditation_period">Срок действия государственной аккредитации образовательной программы (при наличии)</string>
+
     <string name="network_error">Сеть недоступна</string>
     <string name="source_error">Ресурс недоступен</string>
 
