@@ -7,6 +7,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -14,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.commonComposable.CustomDivider
 import com.zxltrxn.nstuproject.commonComposable.ErrorMessage
+import com.zxltrxn.nstuproject.commonComposable.ExpandableRow
 import com.zxltrxn.nstuproject.commonComposable.Header
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.commonComposable.Subtitle1
@@ -31,6 +34,9 @@ fun PointsScreen(
 
     when (uiState) {
         is UiState.IsLoading -> LoadingIndicator()
+        is UiState.Error -> {
+            ErrorMessage(message = (uiState as UiState.Error).message.getString(context = LocalContext.current))
+        }
         is UiState.Loaded -> {
             val state = uiState as UiState.Loaded
             Column(
@@ -40,21 +46,25 @@ fun PointsScreen(
             ) {
                 Header(text = state.data.title)
 
+                val titlesModifier = Modifier.fillMaxWidth(0.95f)
                 LazyColumn() {
                     items(state.data.bases) { base ->
-                        Subtitle1(text = base.title)
-                        val last = base.items.lastIndex
-                        base.items.mapIndexed { i, subject ->
-                            SubjectRow(subject)
-                            CustomDivider(index = i, lastIndex = last)
+                        val baseExpanded = remember { mutableStateOf(false) }
+                        ExpandableRow(baseExpanded) {
+                            Subtitle1(modifier = titlesModifier, text = base.title)
+                        }
+                        if (baseExpanded.value) {
+                            val last = base.items.lastIndex
+                            base.items.mapIndexed { i, subject ->
+                                SubjectRow(subject)
+                                CustomDivider(index = i, lastIndex = last)
+                            }
                         }
                     }
                 }
             }
         }
-        is UiState.Error -> {
-            ErrorMessage(message = (uiState as UiState.Error).message.getString(context = LocalContext.current))
-        }
+
     }
 }
 

@@ -34,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.commonComposable.ErrorMessage
+import com.zxltrxn.nstuproject.commonComposable.ExpandableRow
 import com.zxltrxn.nstuproject.commonComposable.Header
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.commonComposable.SimpleDivider
@@ -53,6 +54,13 @@ fun PlanScreen(
 
     when (uiState) {
         is UiState.IsLoading -> LoadingIndicator()
+        is UiState.Error -> {
+            ErrorMessage(
+                message = (uiState as UiState.Error).message.getString(
+                    context = LocalContext.current
+                )
+            )
+        }
         is UiState.Loaded -> {
             val state = uiState as UiState.Loaded
             Column(
@@ -60,34 +68,20 @@ fun PlanScreen(
                     .fillMaxSize()
                     .padding(horizontal = MaterialTheme.spacing.medium)
             ) {
-                val expandableVerticalPadding = MaterialTheme.spacing.medium
-                val expandModifier: (MutableState<Boolean>) -> Modifier = { isExpanded ->
-                    Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            isExpanded.value = !isExpanded.value
-                        }
-                        .padding(vertical = expandableVerticalPadding)
-                }
-
                 Header(text = state.data.title)
                 LazyColumn {
+                    val titlesModifier = Modifier.fillMaxWidth(0.95f)
                     items(state.data.forms) { form ->
                         val formExpanded = remember { mutableStateOf(false) }
-                        ExpandableRow {
-                            Subtitle1(
-                                modifier = expandModifier(formExpanded),
-                                text = form.title
-                            )
+                        ExpandableRow(formExpanded) {
+                            Subtitle1(modifier = titlesModifier, text = form.title)
                         }
                         if (formExpanded.value) {
                             for (faculty in form.faculties) {
                                 val facultyExpanded = remember { mutableStateOf(false) }
-                                Subtitle2(
-                                    modifier = expandModifier(facultyExpanded),
-                                    text = faculty.name
-                                )
-
+                                ExpandableRow(facultyExpanded) {
+                                    Subtitle2(modifier = titlesModifier, text = faculty.name)
+                                }
                                 if (facultyExpanded.value) {
                                     faculty.directions.map { direction ->
                                         val directionExpanded = remember { mutableStateOf(false) }
@@ -105,27 +99,10 @@ fun PlanScreen(
                 }
             }
         }
-        is UiState.Error -> {
-            ErrorMessage(
-                message = (uiState as UiState.Error).message.getString(
-                    context = LocalContext.current
-                )
-            )
-        }
     }
 }
 
-@Composable
-fun ExpandableRow(content: @Composable RowScope.() -> Unit) {
-    Row() {
-        content()
-//        Image(
-//
-//            painter = painterResource(id = R.drawable.ic_arrow_down),
-//            contentDescription = "open spoiler"
-//        )
-    }
-}
+
 
 @Composable
 fun DirectionContentRow(
