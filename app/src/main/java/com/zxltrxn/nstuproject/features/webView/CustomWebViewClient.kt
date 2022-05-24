@@ -12,7 +12,7 @@ import androidx.compose.runtime.MutableState
 class CustomWebViewClient(
     private val isLoading: MutableState<Boolean>,
     private val backEnabled: MutableState<Boolean>,
-    private val stretchContent: Boolean = false
+    private val style: ContentStyle
 ) : WebViewClient() {
     private val TAG = javaClass.simpleName
     private val urlHostWithIntent: List<String> = listOf("ciu.nstu.ru")
@@ -46,57 +46,9 @@ class CustomWebViewClient(
     }
 
     override fun onPageFinished(view: WebView?, url: String?) {
-        view?.loadUrl(withJS(stretchContent = stretchContent))
+        view?.loadUrl(style.applyStyleInJS())
         super.onPageFinished(view, url)
         isLoading.value = false
         view?.smoothShow()
-    }
-
-    private fun withJS(
-        removeOddBlocks: Boolean = true,
-        removeShadowedBorder: Boolean = true,
-        stretchContent: Boolean
-    ): String {
-        return buildString {
-            append(beginJSFunction)
-            if (removeOddBlocks) append(oddBlocks)
-
-            append(beginStyle)
-            if (removeShadowedBorder) append(shadowedBorder)
-            if (stretchContent) append(stretch)
-            append(endStyle)
-
-            append(endJSFunction)
-        }
-    }
-
-    companion object {
-        const val beginJSFunction = "javascript:(function() {"
-        const val endJSFunction = "})()"
-
-        const val beginStyle = """var node = document.createElement('style');
-            node.type = 'text/css';
-            node.innerHTML = '"""
-        const val endStyle = """';
-            document.head.appendChild(node);"""
-
-        const val oddBlocks: String = """
-            document.getElementsByClassName('header-mobile')[0].style.display="none";
-            document.getElementsByClassName('breadcrumbs')[0].style.display="none";
-            document.getElementsByClassName('page-footer')[0].style.display="none";
-            """
-        
-        const val shadowedBorder = """
-            .page-wrapper {
-                box-shadow: none;
-                -webkit-box-shadow: none;
-            }
-            """
-
-        const val stretch = """
-            .page-wrapper {
-                min-width: min-content;
-            }
-            """
     }
 }

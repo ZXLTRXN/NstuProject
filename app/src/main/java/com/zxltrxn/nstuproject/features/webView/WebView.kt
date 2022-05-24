@@ -41,7 +41,7 @@ fun WebViewScreen(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
-                webViewClient = CustomWebViewClient(isLoading, backEnabled, page.stretchContent)
+                webViewClient = CustomWebViewClient(isLoading, backEnabled, page.contentStyle)
                 settings.cacheMode = page.cacheMode
                 settings.javaScriptEnabled = true
                 settings.loadWithOverviewMode = true
