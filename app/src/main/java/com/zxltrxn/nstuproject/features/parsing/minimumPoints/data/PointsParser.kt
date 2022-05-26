@@ -1,17 +1,19 @@
 package com.zxltrxn.nstuproject.features.parsing.minimumPoints.data
 
 import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.PointsData
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.PointsTable
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.SubjectData
 import org.jsoup.nodes.Document
-import java.io.IOException
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class PointsParser : Parser<PointsData>() {
-    override suspend fun execute(url: String): PointsData {
-        val doc: Document = connect(url) ?: throw IOException("Network error")
+    override suspend fun execute(url: String): Resource<PointsData> {
+
+        val doc: Document = when(val res = getDocument(url)){
+            is Resource.Error -> return res
+            is Resource.Success -> res.data
+        }
 
         val header = doc.select("div.page-title h1").text()
 
@@ -40,6 +42,6 @@ class PointsParser : Parser<PointsData>() {
             }
             pTables
         }
-        return PointsData(title = header, tables = res)
+        return Resource.Success(PointsData(title = header, tables = res))
     }
 }

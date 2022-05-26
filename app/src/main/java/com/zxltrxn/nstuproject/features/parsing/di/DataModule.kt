@@ -2,6 +2,7 @@ package com.zxltrxn.nstuproject.features.parsing.di
 
 import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
 import com.zxltrxn.nstuproject.features.parsing.commonData.ParserRepo
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.AssetManager
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.ParserRepoImpl
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.PointsParser
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.PointsData
@@ -31,10 +32,11 @@ class DataModule {
     @Provides
     @Singleton
     fun provideParserRepo(
+        assetManager: AssetManager,
         pointsParser: Parser<PointsData>,
         planParser: Parser<PlanData>
     ): ParserRepo {
-        return ParserRepoImpl(pointsParser, planParser)
+        return ParserRepoImpl(assetManager, pointsParser, planParser)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.parsing.plan.presentation
+package com.zxltrxn.nstuproject.features.parsing.previousYearPoints
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -7,19 +7,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.LocalizeString
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
-import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
-import com.zxltrxn.nstuproject.features.parsing.plan.domain.GetPlanUseCase
-import com.zxltrxn.nstuproject.features.parsing.plan.domain.model.Plan
+import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.model.PreviousYearPoints
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PlanViewModel @Inject constructor(
-    private val getData: GetPlanUseCase
+class PreviousYearPointsViewModel @Inject constructor(
+    private val getData: GetPreviousYearPoints
 ) : ViewModel() {
-    private val _uiState: MutableState<UiState<Plan>> = mutableStateOf(UiState.IsLoading)
-    val uiState: State<UiState<Plan>> = _uiState
+    private val _uiState: MutableState<UiState> = mutableStateOf(UiState.IsLoading)
+    val uiState: State<UiState> = _uiState
 
     init {
         fetchData()
@@ -36,5 +34,11 @@ class PlanViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    sealed interface UiState {
+        object IsLoading : UiState
+        data class Error(val message: LocalizeString) : UiState
+        data class Loaded(val data: PreviousYearPoints) : UiState
     }
 }

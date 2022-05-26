@@ -11,9 +11,9 @@ class PlanParserTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun test() = runTest{
-        val data = parser.execute(Page.RECRUITING_PLAN.url)
-        println(data.title)
-        println(data.formTables[1].faculties.last().directions[10])
+//        val data = parser.execute(Page.RECRUITING_PLAN.url).
+//        println(data.title)
+//        println(data.formTables[1].faculties.last().directions[10])
         Assert.assertEquals(4, 2 + 2)
     }
 }

@@ -13,8 +13,10 @@ import com.zxltrxn.nstuproject.destinations.WebViewScreenDestination
 import com.zxltrxn.nstuproject.destinations.AchievementsScreenDestination
 import com.zxltrxn.nstuproject.destinations.PointsScreenDestination
 import com.zxltrxn.nstuproject.destinations.PlanScreenDestination
+import com.zxltrxn.nstuproject.destinations.PreviousYearPointsScreenDestination
 import com.zxltrxn.nstuproject.destinations.RatingScreenDestination
 import com.zxltrxn.nstuproject.features.Page
+import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.PreviousYearPointsScreen
 
 
 @Destination(start = true)
@@ -54,6 +56,9 @@ fun HomeScreen(
             text = "Перечень вступительных испытаний по направлениям(доп)"
         )
         Text(
+            modifier = Modifier.clickable {
+                navigator.navigate(direction = PreviousYearPointsScreenDestination())
+            },
             text = "баллы прошлого года(доп)"
         )
         Text(

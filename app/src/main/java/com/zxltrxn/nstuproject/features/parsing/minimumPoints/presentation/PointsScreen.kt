@@ -20,8 +20,9 @@ import com.zxltrxn.nstuproject.commonComposable.ExpandableRow
 import com.zxltrxn.nstuproject.commonComposable.Header
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.commonComposable.Subtitle1
+import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Subject
-import com.zxltrxn.nstuproject.features.parsing.minimumPoints.presentation.PointsViewModel.UiState
+
 import com.zxltrxn.nstuproject.ui.spacing
 
 @Destination

@@ -13,7 +13,11 @@
     <string name="competitive_group">Конкурсная группа</string>
     <string name="accreditation_period">Срок действия государственной аккредитации образовательной программы (при наличии)</string>
 
+    <string name="budget_points">Баллов на бюджет</string>
+    <string name="contract_points">Баллов на контракт</string>
+
     <string name="network_error">Сеть недоступна</string>
     <string name="source_error">Ресурс недоступен</string>
+    <string name="data_error">Данные недоступны</string>
 
 </resources>

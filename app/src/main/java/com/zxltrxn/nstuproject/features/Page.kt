@@ -25,7 +25,7 @@ enum class Page(
     ENTRANCE_EXAMINATIONS(
         "https://www.nstu.ru/entrance/committee/prilogenie3",
         ContentStyle(stretchTable = true)
-    ), // (с листалкой но неудобно)  !!!
+    ), // (с листалкой)
     ENTRANCE_EXAMINATIONS_SCHEDULE("https://www.nstu.ru/entrance/entrance_all/schedule"), //старое
     SPECIAL_RIGHTS_FOR_WINNERS("https://www.nstu.ru/entrance/committee/prilogenie4"), // готово
     INDIVIDUAL_ACHIEVEMENTS(

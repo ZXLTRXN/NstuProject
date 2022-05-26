@@ -1,6 +1,7 @@
 package com.zxltrxn.nstuproject.features.parsing.plan.data
 
 import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.DirectionData
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.FacultyData
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.FormTable
@@ -11,8 +12,13 @@ import java.io.IOException
 class PlanParser : Parser<PlanData>() {
     val TAG = javaClass.simpleName
 
-    override suspend fun execute(url: String): PlanData {
-        val doc: Document = connect(url) ?: throw IOException("Network error")
+    override suspend fun execute(url: String): Resource<PlanData> {
+
+        val doc: Document = when(val res = getDocument(url)){
+            is Resource.Error -> return res
+            is Resource.Success -> res.data
+        }
+
         val title = doc.select("div.page-title h1").text()
         val tables = doc.select("table")
         val formsTitles = doc.select("a.enrollee-plan__anchor").map { it.text() }
@@ -65,6 +71,6 @@ class PlanParser : Parser<PlanData>() {
             }
             forms.add(FormTable(title = formsTitles[tableIndex], faculties = faculties))
         }
-        return PlanData(title, forms)
+        return Resource.Success(PlanData(title, forms))
     }
 }

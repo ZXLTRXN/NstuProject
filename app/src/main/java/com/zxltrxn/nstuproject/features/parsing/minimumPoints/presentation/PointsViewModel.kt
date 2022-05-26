@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.LocalizeString
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
+import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.GetPointsUseCase
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Points
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,8 +18,8 @@ import javax.inject.Inject
 class PointsViewModel @Inject constructor(
     private val getData: GetPointsUseCase
 ) : ViewModel() {
-    private val _uiState: MutableState<UiState> = mutableStateOf(UiState.IsLoading)
-    val uiState: State<UiState> = _uiState
+    private val _uiState: MutableState<UiState<Points>> = mutableStateOf(UiState.IsLoading)
+    val uiState: State<UiState<Points>> = _uiState
 
     init {
         fetchData()
@@ -37,9 +38,4 @@ class PointsViewModel @Inject constructor(
         }
     }
 
-    sealed interface UiState {
-        object IsLoading : UiState
-        data class Error(val message: LocalizeString) : UiState
-        data class Loaded(val data: Points) : UiState
-    }
 }

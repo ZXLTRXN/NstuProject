@@ -11,42 +11,46 @@ import com.zxltrxn.nstuproject.features.parsing.minimumPoints.toPoints
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.PlanData
 import com.zxltrxn.nstuproject.features.parsing.plan.domain.model.Plan
 import com.zxltrxn.nstuproject.features.parsing.plan.toPlan
+import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.model.Form
+import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.model.PreviousYearPoints
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.IOException
-import java.lang.Exception
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 class ParserRepoImpl @Inject constructor(
+    private val assetManager: AssetManager,
     private val pointsParser: Parser<PointsData>,
     private val planParser: Parser<PlanData>
 ) : ParserRepo {
 
     override suspend fun getPoints(): Resource<Points> = withContext(Dispatchers.IO) {
-        val res = tryExecute { pointsParser.execute(Page.MINIMUM_POINTS.url) }
-        return@withContext when (res) {
-            is Resource.Error -> res
-            is Resource.Success -> Resource.Success(res.data.toPoints())
-        }
+        val res = pointsParser.execute(Page.MINIMUM_POINTS.url)
+        return@withContext res.map { pointsData -> pointsData.toPoints() }
     }
 
     override suspend fun getPlan(): Resource<Plan> = withContext(Dispatchers.IO) {
-        val res = tryExecute { planParser.execute(Page.RECRUITING_PLAN.url) }
-        return@withContext when (res) {
-            is Resource.Error -> res
-            is Resource.Success -> Resource.Success(res.data.toPlan())
-        }
+        val res = planParser.execute(Page.RECRUITING_PLAN.url)
+        return@withContext res.map { planData -> planData.toPlan() }
     }
 
-
-    private suspend fun <T> tryExecute(execute: suspend () -> T): Resource<T> {
-        return try {
-            Resource.Success(execute())
-        } catch (e: IOException) {
-            Resource.Error(LocalizeString.Resource(R.string.network_error), 1)
-        } catch (e: Exception) {
-            Log.e(javaClass.simpleName, "tryExecute: ${e.message}")
-            Resource.Error(LocalizeString.Resource(R.string.source_error), 0)
+    override suspend fun getPreviousYearPoints(): Resource<PreviousYearPoints> =
+        withContext(Dispatchers.IO) {
+            val json = assetManager.read("points2021.json")
+            val error =
+                Resource.Error(
+                    LocalizeString.Resource(R.string.data_error),
+                    ErrorCode.SERIALIZATION
+                )
+            return@withContext if (json == null) error
+            else {
+                try {
+                    Resource.Success(Json.decodeFromString<PreviousYearPoints>(json))
+                } catch (e: SerializationException) {
+                    error
+                }
+            }
         }
-    }
 }
