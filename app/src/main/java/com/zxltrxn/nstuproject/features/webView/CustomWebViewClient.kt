@@ -15,7 +15,7 @@ class CustomWebViewClient(
     private val style: ContentStyle
 ) : WebViewClient() {
     private val TAG = javaClass.simpleName
-    private val urlHostWithIntent: List<String> = listOf("ciu.nstu.ru")
+
     private val allowedUrlHost: List<String> = listOf(
         "www.nstu.ru", "www.avtf.nstu.ru", "www.fla.nstu.ru", "www.mtf.nstu.ru",
         "www.fma.nstu.ru", "www.fpmi.nstu.ru", "www.ref.nstu.ru", "www.ftf.nstu.ru",
@@ -34,14 +34,13 @@ class CustomWebViewClient(
         request: WebResourceRequest?
     ): Boolean {
         Log.d(TAG, "shouldOverrideUrlLoading: ${request?.url?.host}")
-        return if (request?.url?.host in urlHostWithIntent) {
-            Log.d(TAG, "shouldOverrideUrlLoading: intent")
+        return if (request?.url?.host !in allowedUrlHost) {
             view?.context?.startActivity(
                 Intent(Intent.ACTION_VIEW, request?.url)
             )
             true
         } else {
-            request?.url?.host !in allowedUrlHost
+            false
         }
     }
 

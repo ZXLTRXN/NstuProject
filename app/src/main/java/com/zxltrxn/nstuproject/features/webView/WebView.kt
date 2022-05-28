@@ -1,6 +1,8 @@
 package com.zxltrxn.nstuproject.features.webView
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
+import androidx.core.content.ContextCompat.startActivity
 import com.ramcosta.composedestinations.annotation.Destination
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.features.Page
+
 
 @SuppressLint("SetJavaScriptEnabled")
 @Destination
@@ -47,6 +51,12 @@ fun WebViewScreen(
                 settings.loadWithOverviewMode = true
                 settings.useWideViewPort = true
                 webView = this
+
+                setDownloadListener { url,_,_,_,_ ->
+                    val i = Intent(Intent.ACTION_VIEW)
+                    i.data = Uri.parse(url)
+                    context.startActivity(i)
+                }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && isDarkTheme) {
                     settings.forceDark = WebSettings.FORCE_DARK_ON
