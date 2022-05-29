@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.parsing.commonDomain
+package com.zxltrxn.nstuproject.features.parsing.commonData
 
 import android.content.Context
 import android.util.Log

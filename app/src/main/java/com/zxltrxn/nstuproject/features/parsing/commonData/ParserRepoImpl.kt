@@ -1,17 +1,18 @@
-package com.zxltrxn.nstuproject.features.parsing.commonDomain
+package com.zxltrxn.nstuproject.features.parsing.commonData
 
-import android.util.Log
 import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.features.Page
-import com.zxltrxn.nstuproject.features.parsing.commonData.Parser
-import com.zxltrxn.nstuproject.features.parsing.commonData.ParserRepo
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.ErrorCode
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.LocalizeString
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.ParserRepo
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.map
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.data.model.PointsData
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Points
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.toPoints
 import com.zxltrxn.nstuproject.features.parsing.plan.data.model.PlanData
 import com.zxltrxn.nstuproject.features.parsing.plan.domain.model.Plan
 import com.zxltrxn.nstuproject.features.parsing.plan.toPlan
-import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.model.Form
 import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.model.PreviousYearPoints
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

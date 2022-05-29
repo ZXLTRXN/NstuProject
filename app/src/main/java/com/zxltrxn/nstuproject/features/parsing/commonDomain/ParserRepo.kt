@@ -1,4 +1,4 @@
-package com.zxltrxn.nstuproject.features.parsing.commonData
+package com.zxltrxn.nstuproject.features.parsing.commonDomain
 
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Points

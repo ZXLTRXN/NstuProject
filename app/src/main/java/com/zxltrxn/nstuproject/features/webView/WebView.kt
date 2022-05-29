@@ -94,6 +94,7 @@ fun WebViewScreen(
                 webView = it
             })
 
+//        Log.d("TAG", "WebViewScreen: ${backEnabled.value}")
         BackHandler(enabled = backEnabled.value) {
             webView?.goBack()
         }

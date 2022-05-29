@@ -26,6 +26,7 @@ class CustomWebViewClient(
     )
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+//        Log.d("TAG", "onPageStarted: ${view?.canGoBack()}")
         changeBackEnabled(view?.canGoBack() ?: false)
         changeLoading(true)
         view?.visibility = View.INVISIBLE
