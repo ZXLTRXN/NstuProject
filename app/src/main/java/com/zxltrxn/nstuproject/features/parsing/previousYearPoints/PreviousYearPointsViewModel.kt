@@ -5,7 +5,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zxltrxn.nstuproject.features.parsing.commonDomain.LocalizeString
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.Resource
 import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.model.PreviousYearPoints
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PreviousYearPointsViewModel @Inject constructor(
-    private val getData: GetPreviousYearPoints
+    private val getData: GetPreviousYearPointsUseCase
 ) : ViewModel() {
     private val _uiState: MutableState<UiState<PreviousYearPoints>> = mutableStateOf(UiState.IsLoading)
     val uiState: State<UiState<PreviousYearPoints>> = _uiState
