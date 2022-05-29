@@ -29,7 +29,7 @@ import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.commonComposable.SimpleDivider
 import com.zxltrxn.nstuproject.commonComposable.Subtitle1
 import com.zxltrxn.nstuproject.commonComposable.Subtitle2
-import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.PreviousYearPointsViewModel.UiState
+import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.model.Direction
 import com.zxltrxn.nstuproject.ui.spacing
 

@@ -4,14 +4,17 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
 import android.view.View
+import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.runtime.MutableState
+import com.zxltrxn.nstuproject.features.parsing.commonDomain.ErrorCode
 
 class CustomWebViewClient(
-    private val isLoading: MutableState<Boolean>,
-    private val backEnabled: MutableState<Boolean>,
+    private val changeLoading: (Boolean) -> Unit,
+    private val changeBackEnabled: (Boolean) -> Unit,
+    private val changeErrorCode: (Int?) -> Unit,
     private val style: ContentStyle
 ) : WebViewClient() {
     private val TAG = javaClass.simpleName
@@ -23,8 +26,8 @@ class CustomWebViewClient(
     )
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-        backEnabled.value = view?.canGoBack() ?: false
-        if (!isLoading.value) isLoading.value = true
+        changeBackEnabled(view?.canGoBack() ?: false)
+        changeLoading(true)
         view?.visibility = View.INVISIBLE
         super.onPageStarted(view, url, favicon)
     }
@@ -47,7 +50,21 @@ class CustomWebViewClient(
     override fun onPageFinished(view: WebView?, url: String?) {
         view?.loadUrl(style.applyStyleInJS())
         super.onPageFinished(view, url)
-        isLoading.value = false
+        changeLoading(false)
         view?.smoothShow()
+    }
+
+    override fun onReceivedError(
+        view: WebView?,
+        request: WebResourceRequest?,
+        error: WebResourceError?
+    ) {
+        super.onReceivedError(view, request, error)
+        val code = when (error?.errorCode) {
+            ERROR_HOST_LOOKUP -> ErrorCode.NETWORK.code
+            ERROR_CONNECT -> null
+            else -> ErrorCode.SOURCE_UNAVAILABLE.code
+        }
+        changeErrorCode(code)
     }
 }
