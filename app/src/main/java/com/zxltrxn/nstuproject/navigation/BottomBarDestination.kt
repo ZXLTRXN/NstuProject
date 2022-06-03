@@ -5,12 +5,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.destinations.ContactsWebViewDestination
 import com.zxltrxn.nstuproject.destinations.HomeScreenDestination
 import com.zxltrxn.nstuproject.destinations.PersonalAreaWebViewDestination
+import com.zxltrxn.nstuproject.destinations.RatingScreenDestination
 
 
 enum class BottomBarDestination(
@@ -24,7 +26,8 @@ enum class BottomBarDestination(
         PersonalAreaWebViewDestination,
         Icons.Default.Person,
         R.string.personal_area_screen_name
-    )
+    ),
+    Map(RatingScreenDestination,Icons.Default.Place,R.string.map_screen_name)
 }
 
 

@@ -106,7 +106,13 @@ fun DirectionPoints(direction: Direction, isExpanded: MutableState<Boolean>, onC
             )
 
             if (isExpanded.value) {
+                DirectionContentRow(
+                    title = stringResource(id = R.string.profile),
+                    value = profile
+                )
+
                 budget?.let {
+                    SimpleDivider()
                     DirectionContentRow(
                         title = stringResource(id = R.string.budget_points),
                         value = it
