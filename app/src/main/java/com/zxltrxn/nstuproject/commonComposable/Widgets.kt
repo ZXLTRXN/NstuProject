@@ -14,6 +14,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -43,12 +44,21 @@ fun SimpleDivider() =
             .padding(top = 3.dp)
     )
 
+
+fun MutableState<Boolean>.toggle(){
+    this.value = !this.value
+}
+
 @Composable
-fun ExpandableRow(isExpanded: MutableState<Boolean>, content: @Composable RowScope.() -> Unit) {
+fun ExpandableRow(
+    isExpanded: State<Boolean>,
+    toggle: () -> Unit,
+    content: @Composable RowScope.() -> Unit
+) {
     val modifier = Modifier
         .fillMaxWidth()
         .clickable {
-            isExpanded.value = !isExpanded.value
+            toggle()
         }
         .padding(vertical = MaterialTheme.spacing.medium)
 
@@ -56,7 +66,9 @@ fun ExpandableRow(isExpanded: MutableState<Boolean>, content: @Composable RowSco
         content()
         Image(
             painter = painterResource(
-                id = if (isExpanded.value) R.drawable.ic_arrow_down else R.drawable.ic_arrow_right
+                id = if (isExpanded.value)
+                    R.drawable.ic_arrow_down
+                else R.drawable.ic_arrow_right
             ),
             contentDescription = "open spoiler"
         )
@@ -68,14 +80,15 @@ fun DirectionContentRow(
     modifier: Modifier = Modifier,
     title: String, value: String,
     titleTextStyle: TextStyle = MaterialTheme.typography.body2,
-    valueTextStyle: TextStyle = MaterialTheme.typography.body1
+    valueTextStyle: TextStyle = MaterialTheme.typography.body1,
+    titleMaxWidth: Float = 0.65f
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            modifier = Modifier.fillMaxWidth(0.65f),
+            modifier = Modifier.fillMaxWidth(titleMaxWidth),
             text = title,
             style = titleTextStyle
         )

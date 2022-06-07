@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,6 +30,7 @@ import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.commonComposable.SimpleDivider
 import com.zxltrxn.nstuproject.commonComposable.Subtitle1
 import com.zxltrxn.nstuproject.commonComposable.Subtitle2
+import com.zxltrxn.nstuproject.commonComposable.toggle
 import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.model.Direction
 import com.zxltrxn.nstuproject.ui.spacing
@@ -64,13 +66,13 @@ fun PreviousYearPointsScreen(
                     val titlesModifier = Modifier.fillMaxWidth(0.95f)
                     items(state.data.forms) { form ->
                         val formExpanded = remember { mutableStateOf(false) }
-                        ExpandableRow(formExpanded) {
+                        ExpandableRow(isExpanded = formExpanded, toggle = { formExpanded.toggle() }) {
                             Subtitle1(modifier = titlesModifier, text = form.title)
                         }
                         if (formExpanded.value) {
                             for (faculty in form.faculties) {
                                 val facultyExpanded = remember { mutableStateOf(false) }
-                                ExpandableRow(facultyExpanded) {
+                                ExpandableRow(isExpanded = facultyExpanded, toggle = { facultyExpanded.toggle() }) {
                                     Subtitle2(modifier = titlesModifier, text = faculty.name)
                                 }
                                 if (facultyExpanded.value) {
@@ -80,7 +82,7 @@ fun PreviousYearPointsScreen(
                                             direction = direction,
                                             isExpanded = directionExpanded,
                                             onClick = {
-                                                directionExpanded.value = !directionExpanded.value
+                                                directionExpanded.toggle()
                                             })
                                     }
                                 }
@@ -95,7 +97,7 @@ fun PreviousYearPointsScreen(
 
 
 @Composable
-fun DirectionPoints(direction: Direction, isExpanded: MutableState<Boolean>, onClick: () -> Unit) {
+fun DirectionPoints(direction: Direction, isExpanded: State<Boolean>, onClick: () -> Unit) {
     Column() {
         with(direction) {
             DirectionContentRow(
@@ -110,7 +112,8 @@ fun DirectionPoints(direction: Direction, isExpanded: MutableState<Boolean>, onC
             if (isExpanded.value) {
                 DirectionContentRow(
                     title = stringResource(id = R.string.profile),
-                    value = profile
+                    value = profile,
+                    titleMaxWidth = 0.35f
                 )
 
                 budget?.let {

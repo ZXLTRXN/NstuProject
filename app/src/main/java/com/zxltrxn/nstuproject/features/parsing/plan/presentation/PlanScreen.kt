@@ -20,6 +20,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposeCompilerApi
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,6 +42,7 @@ import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.commonComposable.SimpleDivider
 import com.zxltrxn.nstuproject.commonComposable.Subtitle1
 import com.zxltrxn.nstuproject.commonComposable.Subtitle2
+import com.zxltrxn.nstuproject.commonComposable.toggle
 import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.features.parsing.plan.domain.model.Direction
 import com.zxltrxn.nstuproject.ui.spacing
@@ -76,13 +78,13 @@ fun PlanScreen(
                     val titlesModifier = Modifier.fillMaxWidth(0.95f)
                     items(state.data.forms) { form ->
                         val formExpanded = remember { mutableStateOf(false) }
-                        ExpandableRow(formExpanded) {
+                        ExpandableRow(isExpanded = formExpanded, toggle = { formExpanded.toggle() }) {
                             Subtitle1(modifier = titlesModifier, text = form.title)
                         }
                         if (formExpanded.value) {
                             for (faculty in form.faculties) {
                                 val facultyExpanded = remember { mutableStateOf(false) }
-                                ExpandableRow(facultyExpanded) {
+                                ExpandableRow(isExpanded = facultyExpanded, toggle = { facultyExpanded.toggle() }) {
                                     Subtitle2(modifier = titlesModifier, text = faculty.name)
                                 }
                                 if (facultyExpanded.value) {
@@ -92,7 +94,7 @@ fun PlanScreen(
                                             direction = direction,
                                             isExpanded = directionExpanded,
                                             onClick = {
-                                                directionExpanded.value = !directionExpanded.value
+                                                directionExpanded.toggle()
                                             })
                                     }
                                 }
@@ -107,7 +109,7 @@ fun PlanScreen(
 
 
 @Composable
-fun Direction(direction: Direction, isExpanded: MutableState<Boolean>, onClick: () -> Unit) {
+fun Direction(direction: Direction, isExpanded: State<Boolean>, onClick: () -> Unit) {
     Column() {
         with(direction) {
             DirectionContentRow(

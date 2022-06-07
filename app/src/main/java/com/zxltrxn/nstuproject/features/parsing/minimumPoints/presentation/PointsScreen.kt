@@ -20,6 +20,7 @@ import com.zxltrxn.nstuproject.commonComposable.ExpandableRow
 import com.zxltrxn.nstuproject.commonComposable.Header
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
 import com.zxltrxn.nstuproject.commonComposable.Subtitle1
+import com.zxltrxn.nstuproject.commonComposable.toggle
 import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Subject
 
@@ -36,7 +37,7 @@ fun PointsScreen(
     when (uiState) {
         is UiState.IsLoading -> LoadingIndicator()
         is UiState.Error -> {
-            ErrorMessage(message = (uiState as UiState.Error).message.getString(context = LocalContext.current)){
+            ErrorMessage(message = (uiState as UiState.Error).message.getString(context = LocalContext.current)) {
                 vm.retry()
             }
         }
@@ -53,7 +54,9 @@ fun PointsScreen(
                 LazyColumn() {
                     items(state.data.bases) { base ->
                         val baseExpanded = remember { mutableStateOf(false) }
-                        ExpandableRow(baseExpanded) {
+                        ExpandableRow(
+                            isExpanded = baseExpanded,
+                            toggle = { baseExpanded.toggle() }) {
                             Subtitle1(modifier = titlesModifier, text = base.title)
                         }
                         if (baseExpanded.value) {
