@@ -14,12 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
-import com.zxltrxn.nstuproject.commonComposable.CustomDivider
 import com.zxltrxn.nstuproject.commonComposable.ErrorMessage
 import com.zxltrxn.nstuproject.commonComposable.ExpandableRow
 import com.zxltrxn.nstuproject.commonComposable.Header
 import com.zxltrxn.nstuproject.commonComposable.LoadingIndicator
-import com.zxltrxn.nstuproject.commonComposable.Subtitle1
+import com.zxltrxn.nstuproject.commonComposable.SimpleDivider
+import com.zxltrxn.nstuproject.commonComposable.Subtitle2
 import com.zxltrxn.nstuproject.commonComposable.toggle
 import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.features.parsing.minimumPoints.domain.model.Subject
@@ -50,20 +50,18 @@ fun PointsScreen(
             ) {
                 Header(text = state.data.title)
 
-                val titlesModifier = Modifier.fillMaxWidth(0.95f)
                 LazyColumn() {
                     items(state.data.bases) { base ->
                         val baseExpanded = remember { mutableStateOf(false) }
                         ExpandableRow(
                             isExpanded = baseExpanded,
                             toggle = { baseExpanded.toggle() }) {
-                            Subtitle1(modifier = titlesModifier, text = base.title)
+                            Subtitle2(text = base.title)
                         }
                         if (baseExpanded.value) {
-                            val last = base.items.lastIndex
-                            base.items.mapIndexed { i, subject ->
+                            base.items.map { subject ->
                                 SubjectRow(subject)
-                                CustomDivider(index = i, lastIndex = last)
+                                SimpleDivider()
                             }
                         }
                     }
@@ -77,7 +75,9 @@ fun PointsScreen(
 @Composable
 fun SubjectRow(item: Subject) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = MaterialTheme.spacing.extraSmall),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(

@@ -3,6 +3,8 @@ package com.zxltrxn.nstuproject.commonComposable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +19,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -25,54 +28,62 @@ import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.features.parsing.commonPresentation.UiState
 import com.zxltrxn.nstuproject.ui.spacing
 
-@Composable
-fun CustomDivider(index: Int, lastIndex: Int) {
-    if (index == lastIndex)
-        Spacer(
-            modifier = Modifier
-                .height(MaterialTheme.spacing.extraSmall)
-        )
-    else
-        SimpleDivider()
-}
 
 @Composable
 fun SimpleDivider() =
     Divider(
         modifier = Modifier
-            .height(4.dp)
-            .padding(top = 3.dp)
+            .height(1.dp)
     )
 
 
-fun MutableState<Boolean>.toggle(){
+fun MutableState<Boolean>.toggle() {
     this.value = !this.value
+}
+
+@Composable
+fun RowWithIcon(
+    modifier: Modifier,
+    resourceId: Int,
+    contentDescription: String,
+    content: @Composable BoxScope.() -> Unit
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Box(modifier = Modifier.fillMaxWidth(0.95f)){
+            content()
+        }
+        Image(
+            painter = painterResource(
+                id = resourceId
+            ),
+            contentDescription = contentDescription
+        )
+    }
 }
 
 @Composable
 fun ExpandableRow(
     isExpanded: State<Boolean>,
     toggle: () -> Unit,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
     val modifier = Modifier
-        .fillMaxWidth()
         .clickable {
             toggle()
         }
         .padding(vertical = MaterialTheme.spacing.medium)
 
-    Row(modifier = modifier, verticalAlignment = Alignment.Bottom) {
-        content()
-        Image(
-            painter = painterResource(
-                id = if (isExpanded.value)
-                    R.drawable.ic_arrow_down
-                else R.drawable.ic_arrow_right
-            ),
-            contentDescription = "open spoiler"
-        )
-    }
+    val iconId = if (isExpanded.value) R.drawable.ic_arrow_down else R.drawable.ic_arrow_right
+    RowWithIcon(
+        modifier = modifier,
+        resourceId = iconId,
+        content = content,
+        contentDescription = "open spoiler"
+    )
 }
 
 @Composable

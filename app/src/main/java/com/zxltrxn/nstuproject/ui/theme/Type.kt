@@ -33,7 +33,6 @@ val Typography = Typography(
     subtitle2 = TextStyle(
         fontFamily = fonts,
         fontWeight = FontWeight.Bold,
-        fontStyle = FontStyle.Italic,
         fontSize = 16.sp
     ),
     body1 = TextStyle(
