@@ -36,7 +36,9 @@ fun PointsScreen(
     when (uiState) {
         is UiState.IsLoading -> LoadingIndicator()
         is UiState.Error -> {
-            ErrorMessage(message = (uiState as UiState.Error).message.getString(context = LocalContext.current))
+            ErrorMessage(message = (uiState as UiState.Error).message.getString(context = LocalContext.current)){
+                vm.retry()
+            }
         }
         is UiState.Loaded -> {
             val state = uiState as UiState.Loaded

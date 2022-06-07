@@ -60,7 +60,9 @@ fun PlanScreen(
                 message = (uiState as UiState.Error).message.getString(
                     context = LocalContext.current
                 )
-            )
+            ){
+                vm.retry()
+            }
         }
         is UiState.Loaded -> {
             val state = uiState as UiState.Loaded

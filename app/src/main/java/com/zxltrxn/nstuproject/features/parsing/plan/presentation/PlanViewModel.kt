@@ -25,8 +25,13 @@ class PlanViewModel @Inject constructor(
         fetchData()
     }
 
+    fun retry(){
+        fetchData()
+    }
+
     private fun fetchData() {
         viewModelScope.launch() {
+            _uiState.value = UiState.IsLoading
             when (val res = getData()) {
                 is Resource.Success -> {
                     _uiState.value = UiState.Loaded(data = res.data)

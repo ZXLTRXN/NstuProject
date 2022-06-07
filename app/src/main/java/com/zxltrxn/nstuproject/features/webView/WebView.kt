@@ -50,7 +50,10 @@ fun WebViewScreen(
             stringResource(id = R.string.network_error)
         else
             stringResource(id = R.string.source_error)
-        ErrorMessage(message = message)
+        ErrorMessage(message = message){
+            isLoading.value = true
+            webView?.reload()
+        }
     }
     if (errorCode.value == null) {
         AndroidView(
