@@ -16,13 +16,15 @@ import com.zxltrxn.nstuproject.ui.Spacing
 private val DarkColorPalette = darkColors(
     primary = LightGreen,
     primaryVariant = DarkGreen,
-    secondary = LightRed
+    secondary = LightRed,
+    surface = DarkGray
 )
 
 private val LightColorPalette = lightColors(
     primary = LightRed,
     primaryVariant = DarkRed,
-    secondary = LightGreen
+    secondary = LightGreen,
+    surface = LightGray
 
     /* Other default colors to override
     background = Color.White,

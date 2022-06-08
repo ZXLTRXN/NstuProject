@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.zxltrxn.nstuproject.commonComposable.ColoredBox
 import com.zxltrxn.nstuproject.commonComposable.ErrorMessage
 import com.zxltrxn.nstuproject.commonComposable.ExpandableRow
 import com.zxltrxn.nstuproject.commonComposable.Header
@@ -59,9 +60,10 @@ fun PointsScreen(
                             Subtitle2(text = base.title)
                         }
                         if (baseExpanded.value) {
-                            base.items.map { subject ->
-                                SubjectRow(subject)
-                                SimpleDivider()
+                            base.items.mapIndexed { i, subject ->
+                                ColoredBox(isColored = i % 2 == 0) {
+                                    SubjectRow(subject)
+                                }
                             }
                         }
                     }
