@@ -3,6 +3,7 @@ package com.zxltrxn.nstuproject.features.webView
 import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -15,6 +16,7 @@ class CustomWebViewClient(
     private val changeLoading: (Boolean) -> Unit,
     private val changeBackEnabled: (Boolean) -> Unit,
     private val changeErrorCode: (Int?) -> Unit,
+    private val changeCurrentUrl: (String) -> Unit,
     private val style: ContentStyle
 ) : WebViewClient() {
     private val TAG = javaClass.simpleName
@@ -26,8 +28,9 @@ class CustomWebViewClient(
     )
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-//        Log.d("TAG", "onPageStarted: ${view?.canGoBack()}")
+//        Log.d("TAGR", "onPageStarted: ${view?.canGoBack()}")
         changeBackEnabled(view?.canGoBack() ?: false)
+        changeCurrentUrl(url ?: "")
         changeLoading(true)
         view?.visibility = View.INVISIBLE
         super.onPageStarted(view, url, favicon)

@@ -21,6 +21,8 @@
     <string name="network_error">Сеть недоступна</string>
     <string name="source_error">Ресурс недоступен</string>
     <string name="data_error">Данные недоступны</string>
+    <string name="invalid_browser_intent">Не удается открыть браузер</string>
+    <string name="invalid_link">Битая ссылка</string>
     <string name="retry_button">Обновить</string>
 
 </resources>
