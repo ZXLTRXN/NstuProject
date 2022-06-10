@@ -60,7 +60,6 @@ fun WebViewScreen(
     val isDarkTheme = isSystemInDarkTheme()
 
     val currentUrl = remember { mutableStateOf(page.url) }
-    val backEnabled = remember { mutableStateOf(false) }
     val isLoading = remember { mutableStateOf(true) }
     val errorCode = remember { mutableStateOf<Int?>(null) }
 
@@ -99,9 +98,6 @@ fun WebViewScreen(
                             changeErrorCode = { code ->
                                 errorCode.value = code
                             },
-                            changeBackEnabled = { isEnabled ->
-                                backEnabled.value = isEnabled
-                            },
                             changeCurrentUrl = { url ->
                                 currentUrl.value = url
                             },
@@ -127,8 +123,7 @@ fun WebViewScreen(
                 })
         }
 
-//        Log.d("TAGR", "WebViewScreen: ${backEnabled.value}")
-        BackHandler(enabled = backEnabled.value) {
+        BackHandler(enabled = !currentUrl.value.startsWith(page.url)) {
             webView?.goBack()
         }
     }

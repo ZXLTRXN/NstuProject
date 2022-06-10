@@ -14,7 +14,6 @@ import com.zxltrxn.nstuproject.features.parsing.commonDomain.ErrorCode
 
 class CustomWebViewClient(
     private val changeLoading: (Boolean) -> Unit,
-    private val changeBackEnabled: (Boolean) -> Unit,
     private val changeErrorCode: (Int?) -> Unit,
     private val changeCurrentUrl: (String) -> Unit,
     private val style: ContentStyle
@@ -28,8 +27,6 @@ class CustomWebViewClient(
     )
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-//        Log.d("TAGR", "onPageStarted: ${view?.canGoBack()}")
-        changeBackEnabled(view?.canGoBack() ?: false)
         changeCurrentUrl(url ?: "")
         changeLoading(true)
         view?.visibility = View.INVISIBLE
