@@ -25,4 +25,19 @@
     <string name="invalid_link">Битая ссылка</string>
     <string name="retry_button">Обновить</string>
 
+    <string name="min_points">Минимальные баллы по ЕГЭ</string>
+    <string name="directions_selection">Подобрать направление по ЕГЭ</string>
+    <string name="entrance_exams">Вступительные испытания для направлении</string>
+    <string name="previous_year_points">Баллы прошлого года</string>
+    <string name="plan">План набора на текущий год</string>
+    <string name="individual_achievements">Индивидуальные достижения</string>
+    <string name="study_plans">Учебные планы</string>
+    <string name="grants">Стипендии</string>
+    <string name="hostel">Общежития</string>
+    <string name="contract_execution">Оформление контракта</string>
+    <string name="cost">Стоимость обучения</string>
+    <string name="documents">Документы</string>
+    <string name="rating_list">Рейтинговые списки</string>
+    <string name="question">Задать вопрос</string>
+
 </resources>

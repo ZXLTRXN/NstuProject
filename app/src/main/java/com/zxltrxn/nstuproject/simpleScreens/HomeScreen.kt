@@ -2,13 +2,16 @@ package com.zxltrxn.nstuproject.simpleScreens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.destinations.WebViewScreenDestination
 import com.zxltrxn.nstuproject.destinations.AchievementsScreenDestination
 import com.zxltrxn.nstuproject.destinations.PointsScreenDestination
@@ -16,7 +19,6 @@ import com.zxltrxn.nstuproject.destinations.PlanScreenDestination
 import com.zxltrxn.nstuproject.destinations.PreviousYearPointsScreenDestination
 import com.zxltrxn.nstuproject.destinations.RatingScreenDestination
 import com.zxltrxn.nstuproject.features.Page
-import com.zxltrxn.nstuproject.features.parsing.previousYearPoints.PreviousYearPointsScreen
 
 
 @Destination(start = true)
@@ -29,121 +31,96 @@ fun HomeScreen(
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(direction = PointsScreenDestination())
-            },
-            text = "Минимальные баллы по ЕГЭ"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.SEARCH_BACHELORS_PROGRAMS
-                    )
+        MenuElement(text = stringResource(R.string.min_points)) {
+            navigator.navigate(direction = PointsScreenDestination())
+        }
+        MenuElement(text = stringResource(R.string.directions_selection)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.SEARCH_BACHELORS_PROGRAMS
                 )
-            },
-            text = "Подобрать направление обучения по предметам ЕГЭ (так же баллы прошлых лет и набор)"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.ENTRANCE_EXAMINATIONS
-                    )
+            )
+        }
+        MenuElement(text = stringResource(R.string.entrance_exams)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.ENTRANCE_EXAMINATIONS
                 )
-            },
-            text = "Перечень вступительных испытаний по направлениям(доп)"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(direction = PreviousYearPointsScreenDestination())
-            },
-            text = "баллы прошлого года(доп)"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(direction = PlanScreenDestination())
-            },
-            text = "План набора на текущий год(доп)"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(direction = AchievementsScreenDestination())
-            },
-            text = "Индивидуальные достижения"
-        )
+            )
+        }
+        MenuElement(text = stringResource(R.string.previous_year_points)) {
+            navigator.navigate(direction = PreviousYearPointsScreenDestination())
+        }
+        MenuElement(text = stringResource(R.string.plan)) {
+            navigator.navigate(direction = PlanScreenDestination())
+        }
+        MenuElement(text = stringResource(R.string.individual_achievements)) {
+            navigator.navigate(direction = AchievementsScreenDestination())
+        }
+        Spacer(modifier = Modifier.height(5.dp))
+        MenuElement(text = stringResource(R.string.study_plans)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.EDUCATIONAL_PLANS
+                )
+            )
+        }
+        MenuElement(text = stringResource(R.string.grants)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.GRANTS
+                )
+            )
+        }
+        MenuElement(text = stringResource(R.string.hostel)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.HOSTEL
+                )
+            )
+        }
         Spacer(modifier = Modifier.height(5.dp))
 
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.EDUCATIONAL_PLANS
-                    )
+        MenuElement(text = stringResource(R.string.contract_execution)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.CONTRACT
                 )
-            },
-            text = "Учебные планы"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.GRANTS
-                    )
+            )
+        }
+        MenuElement(text = stringResource(R.string.cost)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.COST
                 )
-            },
-            text = "Стипендии"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.HOSTEL
-                    )
+            )
+        }
+        MenuElement(text = stringResource(R.string.documents)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.ACCEPTANCE_OF_DOCUMENTS
                 )
-            },
-            text = "Общежития"
-        )
+            )
+        }
         Spacer(modifier = Modifier.height(5.dp))
-
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.CONTRACT
-                    )
+        MenuElement(text = stringResource(R.string.rating_list)) {
+            navigator.navigate(direction = RatingScreenDestination())
+        }
+        MenuElement(text = stringResource(R.string.question)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.QUESTIONS
                 )
-            },
-            text = "О контракте"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.COST
-                    )
-                )
-            },
-            text = "Стоимость обучения"
-        )
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(
-                    direction = WebViewScreenDestination(
-                        page = Page.ACCEPTANCE_OF_DOCUMENTS
-                    )
-                )
-            },
-            text = "Документы"
-        )
-
-        Spacer(modifier = Modifier.height(5.dp))
-        Text(
-            modifier = Modifier.clickable {
-                navigator.navigate(direction = RatingScreenDestination())
-            },
-            text = "Рейтинговые списки"
-        )
+            )
+        }
     }
+}
+
+@Composable
+fun MenuElement(text: String, onClick:()->Unit){
+    Text(
+        modifier = Modifier.clickable() { onClick() },
+        style = MaterialTheme.typography.h6,
+        text = text
+    )
 }

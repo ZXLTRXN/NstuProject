@@ -23,7 +23,6 @@ fun Subtitle1(modifier: Modifier = Modifier, text: String) {
         Text(text = text, style = MaterialTheme.typography.subtitle1)
         Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
     }
-
 }
 
 @Composable

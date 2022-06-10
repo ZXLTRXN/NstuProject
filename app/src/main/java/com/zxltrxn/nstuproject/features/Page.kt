@@ -48,6 +48,7 @@ enum class Page(
         ContentStyle(stretchMinContent = true),
         WebSettings.LOAD_NO_CACHE
     ), // готово
-    INVALID("https://www.nstu.ru/studies/study/ZIS#escort")
+    INVALID("https://www.nstu.ru/studies/study/ZIS#escort"),
+    QUESTIONS("https://www.nstu.ru/entrance/answers")
 }
 // ciu.nstu.ru онлаин кабинет
