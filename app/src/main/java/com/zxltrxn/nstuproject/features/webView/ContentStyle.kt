@@ -4,12 +4,14 @@ data class ContentStyle(
     val removeOddBlocks: Boolean = true,
     val removeShadowedBorder: Boolean = true,
     val stretchMinContent: Boolean = false,
-    val stretchTable: Boolean = false
+    val stretchTable: Boolean = false,
+    val removeOddBlocksCiu: Boolean = false
 ){
     fun applyStyleInJS(): String {
         return buildString {
             append(beginJSFunction)
             if (removeOddBlocks) append(oddBlocks)
+            if (removeOddBlocksCiu) append(oddBlocksCiu)
 
             append(beginStyle)
             if (removeShadowedBorder) append(shadowedBorder)
@@ -36,6 +38,12 @@ data class ContentStyle(
             document.getElementsByClassName('breadcrumbs')[0].style.display="none";
             document.getElementsByClassName('page-footer')[0].style.display="none";
             document.getElementsByClassName('page-bottom')[0].style.display="none";
+            """
+
+        const val oddBlocksCiu: String = """
+            document.getElementsByClassName('navbar')[0].style.display="none";
+            document.getElementsByClassName('page-header')[0].style="none";
+            document.getElementsByClassName('footer')[0].style.display="none";
             """
 
         const val shadowedBorder = """

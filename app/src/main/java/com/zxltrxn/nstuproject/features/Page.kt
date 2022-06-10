@@ -31,15 +31,16 @@ enum class Page(
     INDIVIDUAL_ACHIEVEMENTS(
         "https://www.nstu.ru/entrance/committee/prilogenie5",
         ContentStyle(stretchTable = true),
-        WebSettings.LOAD_NO_CACHE
     ), // (с листалкой)
-    PERSONAL_AREA("https://ciu.nstu.ru/enrollee_account/"), // интент хедер                                    !!!
+    PERSONAL_AREA(
+        "https://ciu.nstu.ru/enrollee_account/",
+        ContentStyle(removeOddBlocks = false, removeOddBlocksCiu = true)
+    ), // готово
     ACCEPTANCE_OF_DOCUMENTS("https://www.nstu.ru/entrance/committee/entrance_examination"), // готово
     CONTRACT("https://www.nstu.ru/entrance/committee/contract"), // готово
     COST(
         "https://www.nstu.ru/studies/cost_education/edu_cost",
-        ContentStyle(stretchMinContent = true),
-        WebSettings.LOAD_NO_CACHE
+        ContentStyle(stretchMinContent = true)
     ), // готово
     HOSTEL("https://www.nstu.ru/campus/hostel"), // готово
     GRANTS("https://www.nstu.ru/studies/study/scholarship"), // готово

@@ -13,6 +13,7 @@ import androidx.compose.runtime.MutableState
 import com.zxltrxn.nstuproject.features.parsing.commonDomain.ErrorCode
 
 class CustomWebViewClient(
+    private val startURL: String,
     private val changeLoading: (Boolean) -> Unit,
     private val changeErrorCode: (Int?) -> Unit,
     private val changeCurrentUrl: (String) -> Unit,
@@ -49,8 +50,9 @@ class CustomWebViewClient(
     }
 
     override fun onPageFinished(view: WebView?, url: String?) {
-        view?.loadUrl(style.applyStyleInJS())
         super.onPageFinished(view, url)
+        val appliedStyle = if (startURL == url) style else ContentStyle()
+        view?.loadUrl(appliedStyle.applyStyleInJS())
         changeLoading(false)
         view?.smoothShow()
     }

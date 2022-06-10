@@ -97,6 +97,7 @@ fun WebViewScreen(
                             ViewGroup.LayoutParams.MATCH_PARENT
                         )
                         webViewClient = CustomWebViewClient(
+                            startURL = page.url,
                             changeLoading = { value ->
                                 isLoading.value = value
                             },
