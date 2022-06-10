@@ -39,5 +39,7 @@
     <string name="documents">Документы</string>
     <string name="rating_list">Рейтинговые списки</string>
     <string name="question">Задать вопрос</string>
+    <string name="hostel_type">Общежитие</string>
+    <string name="campus_type">Учебный корпус</string>
 
 </resources>

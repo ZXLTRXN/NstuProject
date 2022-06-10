@@ -11,6 +11,7 @@ import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.zxltrxn.nstuproject.R
 import com.zxltrxn.nstuproject.destinations.ContactsWebViewDestination
 import com.zxltrxn.nstuproject.destinations.HomeScreenDestination
+import com.zxltrxn.nstuproject.destinations.MapScreenDestination
 import com.zxltrxn.nstuproject.destinations.PersonalAreaWebViewDestination
 import com.zxltrxn.nstuproject.destinations.RatingScreenDestination
 
@@ -27,7 +28,7 @@ enum class BottomBarDestination(
         Icons.Default.Person,
         R.string.personal_area_screen_name
     ),
-    Map(RatingScreenDestination,Icons.Default.Place,R.string.map_screen_name)
+    Map(MapScreenDestination, Icons.Default.Place, R.string.map_screen_name)
 }
 
 

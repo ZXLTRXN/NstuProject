@@ -86,6 +86,10 @@ dependencies {
     // status bar color
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.3-alpha"
 
+    //gmaps
+    implementation("com.google.android.gms:play-services-maps:${maps_version}")
+    implementation("com.google.maps.android:maps-compose:1.0.0")
+
     // hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
