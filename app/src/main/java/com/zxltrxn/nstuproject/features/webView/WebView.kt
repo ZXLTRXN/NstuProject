@@ -28,12 +28,14 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
@@ -59,6 +61,7 @@ fun WebViewScreen(
     val context = LocalContext.current
     val isDarkTheme = isSystemInDarkTheme()
 
+    val loadingPercent = remember { mutableStateOf(0) }
     val currentUrl = remember { mutableStateOf(page.url) }
     val isLoading = remember { mutableStateOf(true) }
     val errorCode = remember { mutableStateOf<Int?>(null) }
@@ -81,7 +84,9 @@ fun WebViewScreen(
     if (errorCode.value == null) {
         Column(modifier = Modifier.fillMaxSize()) {
             if (!isLoading.value) {
-                WebViewHeader(currentUrl.value)
+                WebViewHeader(currentUrl.value){
+                    webView?.scrollTo(0,0)
+                }
             }
             AndroidView(
                 modifier = Modifier.zIndex(1F),
@@ -103,6 +108,11 @@ fun WebViewScreen(
                             },
                             style = page.contentStyle
                         )
+                        webChromeClient = object : WebChromeClient() {
+                            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                                loadingPercent.value = newProgress
+                            }
+                        }
                         settings.cacheMode = page.cacheMode
                         settings.javaScriptEnabled = true
                         settings.loadWithOverviewMode = true
@@ -130,24 +140,34 @@ fun WebViewScreen(
 }
 
 @Composable
-fun WebViewHeader(url: String) {
+fun WebViewHeader(url: String, onUpClick: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End
     ) {
         val context = LocalContext.current
-        Icon(
-            modifier = Modifier
-                .clickable {
-                    browserIntent(url = url, context = context)
-                }
-                .padding(horizontal = 10.dp, vertical = 5.dp)
-                .size(30.dp),
-            imageVector = Icons.Default.Info,
-            contentDescription = "to source"
-        )
+        BarButton(icon = Icons.Default.Info, description = "to source") {
+            browserIntent(url = url, context = context)
+        }
+        BarButton(icon = Icons.Default.KeyboardArrowUp, description = "to top") {
+            onUpClick()
+        }
     }
+}
+
+@Composable
+fun BarButton(icon: ImageVector, description: String, onClick: () -> Unit) {
+    Icon(
+        modifier = Modifier
+            .clickable {
+                onClick()
+            }
+            .padding(horizontal = 10.dp, vertical = 5.dp)
+            .size(30.dp),
+        imageVector = icon,
+        contentDescription = description
+    )
 }
 
 @Destination
