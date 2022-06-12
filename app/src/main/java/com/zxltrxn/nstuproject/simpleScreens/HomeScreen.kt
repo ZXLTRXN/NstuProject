@@ -106,6 +106,20 @@ fun HomeScreen(
         MenuElement(text = stringResource(R.string.rating_list)) {
             navigator.navigate(direction = RatingScreenDestination())
         }
+        MenuElement(text = stringResource(R.string.polyclinic)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.POLYCLINIC
+                )
+            )
+        }
+        MenuElement(text = stringResource(R.string.cultural_center)) {
+            navigator.navigate(
+                direction = WebViewScreenDestination(
+                    page = Page.CULTURAL
+                )
+            )
+        }
         MenuElement(text = stringResource(R.string.question)) {
             navigator.navigate(
                 direction = WebViewScreenDestination(

@@ -50,6 +50,10 @@ enum class Page(
         WebSettings.LOAD_NO_CACHE
     ), // готово
     INVALID("https://www.nstu.ru/studies/study/ZIS#escort"),
-    QUESTIONS("https://www.nstu.ru/entrance/answers")
+    QUESTIONS("https://www.nstu.ru/entrance/answers"), // готово
+    POLYCLINIC("https://www.nstu.ru/campus/health/polyclinic"), // готово
+    CULTURAL("https://www.nstu.ru/campus/culture/culture_centre"), // готово
+    GARAGE("https://www.nstu.ru/campus/garage_point"), // готово
+    PROPHYLAXIS("https://www.nstu.ru/campus/health/health_centre") // готово
 }
 // ciu.nstu.ru онлаин кабинет

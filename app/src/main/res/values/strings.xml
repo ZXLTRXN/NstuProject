@@ -24,6 +24,7 @@
     <string name="invalid_browser_intent">Не удается открыть браузер</string>
     <string name="invalid_link">Битая ссылка</string>
     <string name="retry_button">Обновить</string>
+    <string name="press_to_detail">Нажмите для детальной информации</string>
 
     <string name="min_points">Минимальные баллы по ЕГЭ</string>
     <string name="directions_selection">Подобрать направление по ЕГЭ</string>
@@ -39,7 +40,19 @@
     <string name="documents">Документы</string>
     <string name="rating_list">Рейтинговые списки</string>
     <string name="question">Задать вопрос</string>
+
     <string name="hostel_type">Общежитие</string>
     <string name="campus_type">Учебный корпус</string>
+    <string name="sport_palace">Дворец спорта с манежем</string>
+    <string name="sport_complex">Спорткомплекс, бассеин</string>
+    <string name="cultural_center">Центр культуры</string>
+    <string name="library">Библиотека</string>
+    <string name="sport_ground">Спортивная площадка</string>
+    <string name="polyclinic">Поликлиника</string>
+    <string name="bowling">Боулинг центр «Фотон»</string>
+    <string name="prophylaxis">Профилакторий</string>
+    <string name="business_incubator">Бизнес-инкубатор «Гараж»</string>
+    <string name="detail_link">Подробнее по ссылке</string>
+
 
 </resources>
