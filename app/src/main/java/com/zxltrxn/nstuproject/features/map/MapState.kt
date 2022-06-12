@@ -1,9 +1,6 @@
 package com.zxltrxn.nstuproject.features.map
 
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.MapUiSettings
@@ -13,13 +10,33 @@ data class MapState(
     val uiSettings: MapUiSettings = MapUiSettings(zoomControlsEnabled = false),
     val properties: MapProperties = MapProperties(
         mapType = MapType.HYBRID,
-        mapStyleOptions = MapStyleOptions("[{\"featureType\": \"poi.business\", \"elementType\": \"all\", \"stylers\": [{\"visibility\": \"off\"}]}]")
+        mapStyleOptions = MapStyleOptions(hideOrganizationsJson)
     ),
     val spots: List<Spot> = campusSpots
 ) {
     companion object {
-        private val hideOrganizationsStyle =
-            """[{"featureType": "poi.business", "elementType": "all", "stylers": [{"visibility": "off"}]}]""".trimIndent()
+        private val hideOrganizationsJson = """
+                [
+                    {
+                        "featureType": "poi.business",
+                        "elementType": "all",
+                        "stylers":[
+                            {
+                            "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.government",
+                        "elementType": "all",
+                        "stylers":[
+                            {
+                            "visibility": "off"
+                            }
+                        ]
+                    }
+                ]
+                """.trimIndent()
 
         private val campusSpots = listOf(
             Spot(

@@ -1,6 +1,5 @@
 package com.zxltrxn.nstuproject.features.map
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -35,12 +36,9 @@ import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
-
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.CameraPositionState
-
 import com.google.maps.android.compose.GoogleMap
-
 import com.google.maps.android.compose.Marker
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -95,10 +93,9 @@ fun MapScreen(navigator: DestinationsNavigator) {
 
 @Composable
 fun MyMarker(spot: Spot, onInfoWindowClick: () -> Unit, onInfoWindowClose: () -> Unit) {
-    val title = "${stringResource(spot.type.descriptionId)} ${spot.num ?: ""}"
     Marker(
         position = LatLng(spot.lat, spot.lng),
-        title = title,
+        title = getTitle(spot = spot),
         snippet = stringResource(id = R.string.press_to_detail),
         icon = BitmapDescriptorFactory.defaultMarker(spot.type.markerColor),
         onInfoWindowClick = { onInfoWindowClick() },
@@ -121,8 +118,7 @@ fun DetailInfo(
             .fillMaxHeight(0.5f)
             .background(color = MaterialTheme.colors.background)
             .zIndex(2f)
-            .clickable { },
-        horizontalAlignment = Alignment.CenterHorizontally
+            .verticalScroll(rememberScrollState()),
     ) {
         Row(
             modifier = Modifier
@@ -150,6 +146,7 @@ fun DetailInfo(
 
         spot.description?.let {
             Text(
+                modifier = Modifier.padding(horizontal = MaterialTheme.spacing.small),
                 style = MaterialTheme.typography.h6,
                 text = it
             )
@@ -191,9 +188,3 @@ fun getTitle(spot: Spot): String {
     }
     return title
 }
-
-//        onMapClick = {
-//            val df = DecimalFormat("#.######")
-//            df.roundingMode = RoundingMode.DOWN
-//            Log.d("MapScreen", "lat = ${df.format(it.latitude)}, lng = ${df.format(it.longitude)}")
-//        }
