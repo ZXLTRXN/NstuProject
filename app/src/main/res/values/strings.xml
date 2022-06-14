@@ -26,26 +26,35 @@
     <string name="retry_button">Обновить</string>
     <string name="press_to_detail">Нажмите для детальной информации</string>
 
-    <string name="min_points">Минимальные баллы по ЕГЭ</string>
+    <string name="directions_group">Ознакомься с направлениями</string>
+    <string name="chance_group">Узнай свои шансы</string>
+    <string name="documents_group">Подай документы</string>
+    <string name="competition_group">Следи за конкурсной ситуацией</string>
+    <string name="important_group">Важное для студента</string>
+    <string name="leisure_group">Спорт и творчество</string>
+
+    <string name="min_points">Минимальные баллы</string>
     <string name="directions_selection">Подобрать направление по ЕГЭ</string>
-    <string name="entrance_exams">Вступительные испытания для направлении</string>
-    <string name="previous_year_points">Баллы прошлого года</string>
+    <string name="entrance_exams">Перечень вступительных испытаний</string>
+    <string name="previous_year_points">Баллы поступления прошлого года</string>
     <string name="plan">План набора на текущий год</string>
     <string name="individual_achievements">Индивидуальные достижения</string>
     <string name="study_plans">Учебные планы</string>
     <string name="grants">Стипендии</string>
     <string name="hostel">Общежития</string>
     <string name="contract_execution">Оформление контракта</string>
-    <string name="cost">Стоимость обучения</string>
+    <string name="cost">Стоимость обучения при контракте</string>
     <string name="documents">Документы</string>
+    <string name="campus_card">О кампусной карте</string>
     <string name="rating_list">Рейтинговые списки</string>
-    <string name="question">Задать вопрос</string>
+    <string name="question">Остались вопросы</string>
 
     <string name="hostel_type">Общежитие</string>
     <string name="campus_type">Учебный корпус</string>
     <string name="sport_palace">Дворец спорта с манежем</string>
     <string name="sport_complex">Спорткомплекс, бассеин</string>
     <string name="cultural_center">Центр культуры</string>
+    <string name="sport">Спортивные секции</string>
     <string name="library">Библиотека</string>
     <string name="sport_ground">Спортивная площадка</string>
     <string name="polyclinic">Поликлиника</string>
@@ -53,6 +62,4 @@
     <string name="prophylaxis">Профилакторий</string>
     <string name="business_incubator">Бизнес-инкубатор «Гараж»</string>
     <string name="detail_link">Подробнее по ссылке</string>
-
-
 </resources>

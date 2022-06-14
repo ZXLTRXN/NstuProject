@@ -10,7 +10,6 @@ enum class Page(
 ) {
     PHONE("https://www.nstu.ru/entrance/committee"), // готово
     COMPETITION("https://www.nstu.ru/entrance/committee/completition2020"), //старое
-    COMPETITION21("https://www.nstu.ru/entrance/admission_campaign/current_numbers"), // пусто
     RECRUITING_PLAN("https://www.nstu.ru/entrance/committee/plan"), // готово
     MINIMUM_POINTS("https://www.nstu.ru/entrance/committee/exav_min_22"), // готово
     SEARCH_BACHELORS_PROGRAMS(
@@ -54,6 +53,8 @@ enum class Page(
     POLYCLINIC("https://www.nstu.ru/campus/health/polyclinic"), // готово
     CULTURAL("https://www.nstu.ru/campus/culture/culture_centre"), // готово
     GARAGE("https://www.nstu.ru/campus/garage_point"), // готово
-    PROPHYLAXIS("https://www.nstu.ru/campus/health/health_centre") // готово
+    PROPHYLAXIS("https://www.nstu.ru/campus/health/health_centre"), // готово
+    SPORTS("https://www.nstu.ru/campus/sport/sports_groups"), // готово
+    CAMPUS_CARD("https://www.nstu.ru/campus/Campus_card") // готово
 }
 // ciu.nstu.ru онлаин кабинет
