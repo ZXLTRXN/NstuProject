@@ -30,6 +30,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -148,6 +149,11 @@ fun WebViewHeader(url: String, onUpClick: () -> Unit) {
         horizontalArrangement = Arrangement.End
     ) {
         val context = LocalContext.current
+        if (url == Page.PHONE.url){
+            BarButton(icon = Icons.Default.Phone, description = "call") {
+                call(context = context)
+            }
+        }
         BarButton(icon = Icons.Default.Info, description = "to source") {
             browserIntent(url = url, context = context)
         }
@@ -179,18 +185,29 @@ fun ContactsWebView() = WebViewScreen(Page.PHONE)
 @Composable
 fun PersonalAreaWebView() = WebViewScreen(Page.PERSONAL_AREA)
 
-fun browserIntent(url: String, context: Context) {
+
+fun tryStartActivity(context: Context, intent: Intent, errorId: Int){
+    try {
+        context.startActivity(intent)
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(context, errorId, Toast.LENGTH_LONG).show()
+    }
+}
+
+fun browserIntent(context: Context, url: String,) {
     val i = Intent(Intent.ACTION_VIEW)
     try {
         i.data = Uri.parse(url)
     } catch (e: RuntimeException) {
         Toast.makeText(context, R.string.invalid_link, Toast.LENGTH_LONG).show()
     }
-    try {
-        context.startActivity(i)
-    } catch (e: ActivityNotFoundException) {
-        Toast.makeText(context, R.string.invalid_browser_intent, Toast.LENGTH_LONG).show()
-    }
+    tryStartActivity(context, i, R.string.invalid_browser_intent)
+}
+
+fun call(context: Context, number: String = "83833460231") {
+    val i = Intent(Intent.ACTION_VIEW)
+    i.data = Uri.parse("tel:$number")
+    tryStartActivity(context, i, R.string.invalid_call_intent)
 }
 
 fun View.smoothShow() {

@@ -22,6 +22,7 @@
     <string name="source_error">Ресурс недоступен</string>
     <string name="data_error">Данные недоступны</string>
     <string name="invalid_browser_intent">Не удается открыть браузер</string>
+    <string name="invalid_call_intent">Не удается открыть приложение звонков</string>
     <string name="invalid_link">Битая ссылка</string>
     <string name="retry_button">Обновить</string>
     <string name="press_to_detail">Нажмите для детальной информации</string>

@@ -152,7 +152,7 @@ fun DetailInfo(
             )
         }
         spot.link?.let {
-            LinkText { browserIntent(it, context) }
+            LinkText { browserIntent(context, it) }
         }
         spot.inAppLink?.let {
             LinkText {
