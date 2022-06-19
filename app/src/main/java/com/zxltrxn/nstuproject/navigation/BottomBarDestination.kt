@@ -13,7 +13,6 @@ import com.zxltrxn.nstuproject.destinations.ContactsWebViewDestination
 import com.zxltrxn.nstuproject.destinations.HomeScreenDestination
 import com.zxltrxn.nstuproject.destinations.MapScreenDestination
 import com.zxltrxn.nstuproject.destinations.PersonalAreaWebViewDestination
-import com.zxltrxn.nstuproject.destinations.RatingScreenDestination
 
 
 enum class BottomBarDestination(

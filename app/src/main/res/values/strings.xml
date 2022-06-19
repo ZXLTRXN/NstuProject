@@ -40,6 +40,7 @@
     <string name="previous_year_points">Баллы поступления прошлого года</string>
     <string name="plan">План набора на текущий год</string>
     <string name="individual_achievements">Индивидуальные достижения</string>
+    <string name="special_rights">Особые права победителям и призерам олимпиад</string>
     <string name="study_plans">Учебные планы</string>
     <string name="grants">Стипендии</string>
     <string name="hostel">Общежития</string>
@@ -47,7 +48,7 @@
     <string name="cost">Стоимость обучения при контракте</string>
     <string name="documents">Документы</string>
     <string name="campus_card">О кампусной карте</string>
-    <string name="rating_list">Рейтинговые списки</string>
+    <string name="common_rating_list">Рейтинговые списки</string>
     <string name="question">Остались вопросы</string>
 
     <string name="hostel_type">Общежитие</string>

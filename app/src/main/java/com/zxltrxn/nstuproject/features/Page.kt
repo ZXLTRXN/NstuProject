@@ -14,8 +14,7 @@ enum class Page(
     MINIMUM_POINTS("https://www.nstu.ru/entrance/committee/exav_min_22"), // готово
     SEARCH_BACHELORS_PROGRAMS(
         "https://www.nstu.ru/entrance/committee/search_direction",
-        ContentStyle(stretchMinContent = true),
-        WebSettings.LOAD_NO_CACHE
+        ContentStyle(stretchMinContent = true)
     ), // готово
     EDUCATIONAL_PLANS(
         "https://www.nstu.ru/studies/study/edu_plans",
