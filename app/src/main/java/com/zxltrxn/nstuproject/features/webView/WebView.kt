@@ -135,7 +135,7 @@ fun WebViewScreen(
                 })
         }
 
-        BackHandler(enabled = !currentUrl.value.startsWith(page.url)) {
+        BackHandler(enabled = !currentUrl.value.isCurrentLinkEqualTo(page.url)) {
             webView?.goBack()
         }
     }
@@ -185,6 +185,12 @@ fun ContactsWebView() = WebViewScreen(Page.PHONE)
 @Composable
 fun PersonalAreaWebView() = WebViewScreen(Page.PERSONAL_AREA)
 
+fun String.isCurrentLinkEqualTo(other: String): Boolean {
+    if (!this.startsWith(other)) return false
+
+    val difference = this.replace(other,"")
+    return !difference.startsWith("/")
+}
 
 fun tryStartActivity(context: Context, intent: Intent, errorId: Int){
     try {
