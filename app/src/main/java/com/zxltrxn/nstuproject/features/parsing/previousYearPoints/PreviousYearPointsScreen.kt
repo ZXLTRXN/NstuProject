@@ -84,6 +84,7 @@ fun PreviousYearPointsScreen(
 
                 chosenFaculty.value?.let {
                     Header(text = it.name)
+                    Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
                     DirectionsExpandable(directions = it.directions)
                 }
                 BackHandler(chosenFaculty.value != null) {

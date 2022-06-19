@@ -1,19 +1,25 @@
 package com.zxltrxn.nstuproject
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.simulateHotReload
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.zxltrxn.nstuproject.destinations.ChanceGroupDestination
@@ -28,6 +34,8 @@ import com.zxltrxn.nstuproject.destinations.PointsScreenDestination
 import com.zxltrxn.nstuproject.destinations.PlanScreenDestination
 import com.zxltrxn.nstuproject.destinations.PreviousYearPointsScreenDestination
 import com.zxltrxn.nstuproject.features.Page
+import com.zxltrxn.nstuproject.ui.elevation
+import com.zxltrxn.nstuproject.ui.spacing
 
 
 @Destination(start = true)
@@ -35,79 +43,94 @@ import com.zxltrxn.nstuproject.features.Page
 fun HomeScreen(
     navigator: DestinationsNavigator
 ) {
-    var groupSelected by remember { mutableStateOf<Int?>(null) }
-
     val groups = listOf(
-        R.string.directions_group,
-        R.string.chance_group,
-        R.string.documents_group,
-        R.string.competition_group,
-        R.string.important_group,
-        R.string.leisure_group
+        MenuItem(R.string.directions_group, R.drawable.ic_graduation_cap, DirectionsGroupDestination()),
+        MenuItem(R.string.chance_group, R.drawable.ic_medal, ChanceGroupDestination()),
+        MenuItem(R.string.documents_group, R.drawable.ic_document, DocumentsGroupDestination()),
+        MenuItem(R.string.competition_group, R.drawable.ic_competition, CompetitionGroupDestination()),
+        MenuItem(R.string.important_group, R.drawable.ic_student, ImportantGroupDestination()),
+        MenuItem(R.string.leisure_group, R.drawable.ic_keytar, LeisureGroupDestination())
     )
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        if (groupSelected == null) {
-            groups.forEachIndexed { idx, nameId ->
-                MenuElement(stringResource(id = nameId)) {
-                    groupSelected = idx
-                }
-            }
-            MenuElement(text = stringResource(R.string.question)) {
-                navigator.navigate(WebViewScreenDestination(page = Page.QUESTIONS))
-            }
-        } else {
-            val destination = when (groupSelected) {
-                0 -> DirectionsGroupDestination()
-                1 -> ChanceGroupDestination()
-                2 -> DocumentsGroupDestination()
-                3 -> CompetitionGroupDestination()
-                4 -> ImportantGroupDestination()
-                5 -> LeisureGroupDestination()
-                else -> null
-            }
-            destination?.let{
-                navigator.navigate(direction = it)
+
+    ScreenFrame(headerText = stringResource(id = R.string.home_screen_name)) {
+        groups.forEach { item ->
+            MenuElement(text = stringResource(id = item.titleId), imageId = item.imageId) {
+                navigator.navigate(direction = item.destination)
             }
         }
+        MenuElement(text = stringResource(R.string.question), imageId = R.drawable.ic_question) {
+            navigator.navigate(direction = WebViewScreenDestination(page = Page.QUESTIONS))
+        }
     }
-//    BackHandler(groupSelected != null) {
-//        groupSelected = null
-//    }
 }
 
+
 @Composable
-fun MenuElement(text: String, onClick: () -> Unit) {
-    Text(
-        modifier = Modifier.clickable() { onClick() },
-        style = MaterialTheme.typography.h6,
-        text = text
-    )
+fun MenuElement(text: String, imageId: Int? = null, onClick: () -> Unit) {
+    Surface(
+        modifier = Modifier
+            .padding(vertical = MaterialTheme.spacing.small)
+            .fillMaxWidth()
+            .clickable() { onClick() },
+        shape = MaterialTheme.shapes.large,
+        elevation = MaterialTheme.elevation.small,
+    ) {
+        Column(
+            modifier = Modifier
+                .background(color = MaterialTheme.colors.surface)
+                .padding(
+                    vertical = MaterialTheme.spacing.medium,
+                    horizontal = MaterialTheme.spacing.default
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            imageId?.let {
+                Image(
+                    painter = painterResource(id = it),
+                    contentDescription = "icon"
+                )
+            }
+            Text(
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.h6,
+                text = text
+            )
+        }
+    }
 }
 
 @Composable
 fun GroupHeader(modifier: Modifier = Modifier, text: String) {
-    Text(
-        style = MaterialTheme.typography.h5,
-        text = text
-    )
+    Box(modifier = modifier) {
+        Text(text = text, style = MaterialTheme.typography.h5)
+    }
+}
+
+@Composable
+fun ScreenFrame(
+    headerText: String,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = MaterialTheme.spacing.medium)
+    ) {
+        GroupHeader(text = headerText)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            content = content
+        )
+    }
 }
 
 @Destination
 @Composable
 fun DirectionsGroup(navigator: DestinationsNavigator) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        GroupHeader(text = stringResource(R.string.directions_group))
-
+    ScreenFrame(headerText = stringResource(R.string.directions_group)) {
         MenuElement(text = stringResource(R.string.directions_selection)) {
             navigator.navigate(
                 direction = WebViewScreenDestination(
@@ -135,13 +158,7 @@ fun DirectionsGroup(navigator: DestinationsNavigator) {
 @Destination
 @Composable
 fun ChanceGroup(navigator: DestinationsNavigator) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        GroupHeader(text = stringResource(R.string.chance_group))
-
+    ScreenFrame(headerText = stringResource(R.string.chance_group)) {
         MenuElement(text = stringResource(R.string.min_points)) {
             navigator.navigate(direction = PointsScreenDestination())
         }
@@ -171,13 +188,7 @@ fun ChanceGroup(navigator: DestinationsNavigator) {
 @Destination
 @Composable
 fun DocumentsGroup(navigator: DestinationsNavigator) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        GroupHeader(text = stringResource(R.string.documents_group))
-
+    ScreenFrame(headerText = stringResource(R.string.documents_group)) {
         MenuElement(text = stringResource(R.string.documents)) {
             navigator.navigate(
                 direction = WebViewScreenDestination(
@@ -205,12 +216,7 @@ fun DocumentsGroup(navigator: DestinationsNavigator) {
 @Destination
 @Composable
 fun CompetitionGroup(navigator: DestinationsNavigator) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        GroupHeader(text = stringResource(R.string.competition_group))
+    ScreenFrame(headerText = stringResource(R.string.competition_group)) {
         MenuElement(text = stringResource(R.string.common_rating_list)) {
             navigator.navigate(
                 direction = WebViewScreenDestination(
@@ -229,13 +235,7 @@ fun CompetitionGroup(navigator: DestinationsNavigator) {
 @Destination
 @Composable
 fun ImportantGroup(navigator: DestinationsNavigator) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        GroupHeader(text = stringResource(R.string.important_group))
-
+    ScreenFrame(headerText = stringResource(R.string.important_group)) {
         MenuElement(text = stringResource(R.string.grants)) {
             navigator.navigate(
                 direction = WebViewScreenDestination(
@@ -270,13 +270,9 @@ fun ImportantGroup(navigator: DestinationsNavigator) {
 @Destination
 @Composable
 fun LeisureGroup(navigator: DestinationsNavigator) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    ScreenFrame(
+        headerText = stringResource(R.string.leisure_group)
     ) {
-        GroupHeader(text = stringResource(R.string.leisure_group))
-
         MenuElement(text = stringResource(R.string.cultural_center)) {
             navigator.navigate(
                 direction = WebViewScreenDestination(

@@ -13,7 +13,6 @@ import com.zxltrxn.nstuproject.ui.spacing
 fun Header(modifier: Modifier = Modifier, text: String) {
     Box(modifier = modifier) {
         Text(text = text, style = MaterialTheme.typography.h1)
-        Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
     }
 }
 
@@ -21,7 +20,6 @@ fun Header(modifier: Modifier = Modifier, text: String) {
 fun Subtitle1(modifier: Modifier = Modifier, text: String) {
     Box(modifier = modifier) {
         Text(text = text, style = MaterialTheme.typography.subtitle1)
-        Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
     }
 }
 
@@ -29,6 +27,5 @@ fun Subtitle1(modifier: Modifier = Modifier, text: String) {
 fun Subtitle2(modifier: Modifier = Modifier, text: String) {
     Box(modifier = modifier) {
         Text(text = text, style = MaterialTheme.typography.subtitle2)
-        Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
     }
 }

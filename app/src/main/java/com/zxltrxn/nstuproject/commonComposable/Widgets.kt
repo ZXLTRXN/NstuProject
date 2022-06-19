@@ -77,7 +77,7 @@ fun ColoredBox(isColored: Boolean, content: @Composable BoxScope.() -> Unit){
         .clip(shape = MaterialTheme.shapes.medium)
     if (isColored) modifier = modifier.background(MaterialTheme.colors.surface)
 
-    Box(modifier = modifier.padding(horizontal = 2.dp)){
+    Box(modifier = modifier.padding(horizontal = MaterialTheme.spacing.default)){
         content()
     }
 }

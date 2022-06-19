@@ -28,7 +28,7 @@ fun BottomNavigationBar(
     BottomNavigation(
         modifier = modifier,
         backgroundColor = MaterialTheme.colors.background,
-        elevation = MaterialTheme.elevation.small
+        elevation = MaterialTheme.elevation.medium
     ) {
         BottomBarDestination.values().forEach { item ->
             val isSelected = currentDestination == item.direction
