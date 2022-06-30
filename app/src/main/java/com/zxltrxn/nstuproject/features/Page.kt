@@ -8,12 +8,12 @@ enum class Page(
     val contentStyle: ContentStyle = ContentStyle(),
     val cacheMode: Int = WebSettings.LOAD_CACHE_ELSE_NETWORK
 ) {
-    PHONE("https://www.nstu.ru/entrance/committee"), // готово
+    PHONE("https://nstu.ru/entrance/committee"), // готово
     COMPETITION("https://www.nstu.ru/entrance/committee/completition2020"), //старое
-    RECRUITING_PLAN("https://www.nstu.ru/entrance/committee/plan"), // готово
-    MINIMUM_POINTS("https://www.nstu.ru/entrance/committee/exav_min_22"), // готово
+    RECRUITING_PLAN("https://nstu.ru/entrance/committee/plan"), // готово
+    MINIMUM_POINTS("https://nstu.ru/entrance/committee/exav_min_22"), // готово
     SEARCH_BACHELORS_PROGRAMS(
-        "https://www.nstu.ru/entrance/committee/search_direction",
+        "https://nstu.ru/entrance/committee/search_direction",
         ContentStyle(stretchMinContent = true)
     ), // готово
     EDUCATIONAL_PLANS(
